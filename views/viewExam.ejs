@@ -1,17 +1,78 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Details</title>
+    <title><%= exam.name %></title>
+    <link rel="stylesheet" href="/stylesheets/viewExam.css">
+    <script src="https://kit.fontawesome.com/332a215f17.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
-<body>
-    <%= exam.name %>
-    <%= exam.description %>
-    <form action="/subscribe/<%= exam._id %>" method="POST">
-        <button type="submit">Subscribe </button>
-    </form>
-    
+
+<body style="background-color: #4a6572;" >
+   
+     <nav class="navbar">
+        <span class="navbar-toggle" id="js-navbar-toggle">
+            <i class="fas fa-bars"></i>
+        </span>
+        <a href="/student-home/<%= user._id %>" class="logo">Exam Portal</a>
+        <ul class="main-nav" style="margin-top: 10px;font-size: 19px;" id="js-menu">
+            <li>
+                <a href="/student-home/<%= user._id %>" class="nav-links">Home</a>
+            </li>
+            <li>
+                <a href="/<%= user._id %>/myExams" class="nav-links">Registered Exams</a>
+            </li>
+            <li>
+                <a href="/show-registered-organisations" class="nav-links">Registered Organizations</a>
+            </li>
+
+        </ul>
+    </nav>
+<div style="align-items: center;" class="container mt-5">
+    <div class="jumbotron align-items-center" style="background-color: #3e4041;">
+        <h2 style="color: #fff;" class="display-4"><%= exam.name %></h2>
+        <h6 style="color: rgba(255, 255, 255,0.8);margin-top: 9px;" class="display-6"><%= exam.organizer%></h6>
+
+        <hr  style="color: #fff;" class="my-4">
+            <div class="row">
+                <div class="col-md-8">
+                    <b>
+                        <!-- <p class="lead">More Information about the Organization</p> -->
+                    </b>
+                    <p><%= exam.description %></p>
+                    <br>
+                    <p><%=exam.date%></p>
+                   
+                    <p>Exam starts at <%=exam.startTime%> and is of duration <%=exam.duration %></p>
+                   
+                    <a href="<%= exam.link %>" class="btn" style="background-color: #f9aa33;color: #3e4041;margin-left:5px;padding:5x;margin-top:20px;">Registration Link</a>
+                    <form action="/subscribe/<%= exam._id %>" method="POST">
+                        <button type="submit">Subscribe </button>
+                    </form>   
+
+                </div>
+            
+    </div>
+</div>
+</div>
+<script>
+    		$(document).ready(function(){
+		    $('.count').prop('disabled', true);
+   			$(document).on('click','.plus',function(){
+				$('.count').val(parseInt($('.count').val()) + 1 );
+    		});
+        	$(document).on('click','.minus',function(){
+    			$('.count').val(parseInt($('.count').val()) - 1 );
+    				if ($('.count').val() == 0) {
+						$('.count').val(1);
+					}
+    	    	});
+ 		});
+</script>
 </body>
+
 </html>

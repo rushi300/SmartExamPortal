@@ -7,14 +7,15 @@ const ExamSchema = new mongoose.Schema({
     link               : String,
     date               : String,
     startTime          : String,
-    endTime            : String,
+    endTime: String,
+    duration: String,
     medium             : String,
     isPublic           : Boolean,
     students_registered: [{
         type           : mongoose.Schema.Types.ObjectId,
         ref            : "Student"
-    }]
+    }],
+    organizer: String
 });
-
 
 module.exports = mongoose.model("Exam", ExamSchema);

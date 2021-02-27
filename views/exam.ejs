@@ -1,50 +1,105 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <title>Create Exam</title>
+
+    <link href="/stylesheets/exam.css" rel="stylesheet" media="all">
 </head>
+
 <body>
-    <div class="container">
-        <div class="row">
-            <h1 style="text-align: center">Create an Exam</h1>
-            <div>
-                <form action="/exam/new" method="POST">
-                    <div>
-                        <input type="text" name="name" placeholder="name">
-                    </div>
-                    <div>
-                        <input type="text" name="link" placeholder="Registration Link">
-                    </div>
-                    <div>
-                        <input type="date" name="date" placeholder="Date of Examination">
-                    </div>
-                    <div>
-                        <input type="text" name="description" placeholder="description">
-                    </div>
-                    <div>
-                        <input type="text" name="medium" placeholder="Medium">
-                    </div>
-                    <div>
-                        <input type="text" name="startTime" placeholder="Start of Exam">
-                    </div>
-                    <div>
-                        <input type="text" name="endTime" placeholder="End of Exam">
-                    </div>
-                    <div>
-                        <input type="checkbox"  name="isPublic" value="false">
-                        <label >Private</label>
-                        <input type="checkbox" name="isPublic" value="true">
-                        <label > Public</label>
-                    </div>
-                    <div>
-                        <button type="submit">Enter</button>
-                    </div>
-                </form>
+    <nav class="navbar">
+        <span class="navbar-toggle" id="js-navbar-toggle">
+            <i class="fas fa-bars"></i>
+        </span>
+        <a href="/organisation-home/<%= user._id %>"  class="logo">Exam Portal</a>
+        <ul class="main-nav" style="margin-top: 10px;" id="js-menu">
+         
+            <li>
+                <a href="/exam/new" class="nav-links">Create an Exam</a>
+            </li>
+        </ul>
+    </nav>
+    
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <form action="/exam/new" method="POST">
+                            <div class="col-1.5">
+                                <div class="input-group">
+                                    <label class="label">Name of the Exam</label>
+                                    <input class="input--style-4" type="text" placeholder="" name="name">
+                                </div>
+                            </div>
+                            
+                        <!-- </div> -->
+                        <div class="col-1.5">
+                            <div class="input-group">
+                                <label class="label">Description of the Exam
+                                </label>
+                                <input class="input--style-4" type="text" placeholder="" name="description">
+                            </div>
+                        </div>
+                        <!-- <div class="row row-space"> -->
+                            <div class="col-1.5">
+                                <div class="input-group">
+                                    <label class="label">Paste the registration Link</label>
+                                    <input class="input--style-4" type="text" placeholder="" name="link">
+                                </div>
+                            </div>
+                            
+                        <!-- </div> -->
+                        <div class="row row-space">
+                            <div class="col-3">
+                                <div class="input-group">
+                                    <label class="label">Date</label>
+                                    <input style="padding: 0px 20px;" class="input--style-4" type="date" name="date">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="input-group">
+                                    <label class="label">Start Time</label>
+                                    <input class="input--style-4" type="time" name="startTime">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="input-group">
+                                    <label class="label">End Time</label>
+                                    <input class="input--style-4" type="time" name="endTime">
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Medium</label>
+                                    <input class="input--style-4" type="text" name="medium">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group form-check">
+                                    <input style="size: 28px;margin-top: 42px;" type="checkbox"  name="isPrivate" class="form-check-input" id="exampleCheck1">
+                                    <label style="margin-top: -20px;" class="label" >Private</label>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="" style="text-align: center;margin-top: 20px;">
+                            <button style="background-color: #4a6572;color: #fff;" class="btn btn--radius-2 btn--blue"  type="submit">Create the Exam</button>
+                        </div>
+                        <br>
+                        
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+
 </body>
 </html>
+<!-- end document-->

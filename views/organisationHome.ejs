@@ -4,8 +4,8 @@
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-            <link rel="stylesheet" href="OrgLand.css">
+            <title>Home</title>
+
             <link rel="stylesheet" href="/stylesheets/organisationHome.css">
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
             integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -16,44 +16,30 @@
             <span class="navbar-toggle" id="js-navbar-toggle">
                 <i class="fas fa-bars"></i>
             </span>
-            <a href="#" class="logo">Exam Portal</a>
+            <a href="/organisation-home/<%= user._id %>" class="logo">Exam Portal</a>
             <ul class="main-nav" style="margin-top: 10px;" id="js-menu">
+
                 <li>
-                    <a href="OrgLand.html" class="nav-links">View Exams</a>
+                    <a href="/exam/new" class="nav-links">Create an Exam</a>
                 </li>
                 <li>
-                    <a href="createExam.html" class="nav-links">Create an Exam</a>
+                    <a href="/logout" class="nav-links">Logout</a>
                 </li>
-                <!-- <li>
-                    <a href="OrgUser.html" class="nav-links">Registered Organizations</a>
-                </li> -->
-                <!-- <li>
-                    <a href="#" class="nav-links">Contact Us</a>
-                </li>
-                <li>
-                    <a href="#" class="nav-links">Blog</a>
-                </li>  -->
+              
             </ul>
         </nav>
         <div id='container'>
-          <div class="row my-3">
-            <div style="color: #fff;" class="col-10 mx-auto text-center">
-                <h1 class='text-uppercase' style="font-size: 40px;margin-bottom: 15px;">Some heading</h1>
-                <p style="font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id .</p>
+            <div class="row my-3">
+                <div style="color: #fff;" class="col-10 mx-auto text-center">
+                    <h1 class='text-uppercase' style="font-size: 40px;margin-bottom: 15px;">Some heading</h1>
+                    <p style="font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id .</p>
+                </div>
             </div>
-        </div>
           <div class='widget'>
             <div id='live' class="tab-content">
-              <!-- <tr class="group-table caption">
-                <th COLSPAN="6"><H3>Currently Live Exams</H3>
-                </th>
-             </tr> -->
+
               <table class="group-table">
-                <!-- <tr>
-                  <th COLSPAN="6"><H3>Currently Live Exams</H3>
-                  </th>
-               </tr> -->
-                <!-- <caption>Currently Live Exams</caption> -->
+
                 <thead>
                   <tr>
                     <th>Sr.no</th>
@@ -73,7 +59,7 @@
                     <td><%= element.name %></td>
                     <td><%= element.startTime %></td>
                     <td><%=  element.endTime %></td>
-                    <td>1 hour</td>
+                    <td><%= element.duration %></td>
                     <td><%= element.students_registered.length %></td>
                     </tr>
                 <% i++ %>

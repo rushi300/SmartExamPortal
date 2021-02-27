@@ -1,12 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join Organisation By Student</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join Organisation</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/joinOrganisation.css">
+
 </head>
 <body>
-    
+
+    <!-- Navbar begins -->
+    <nav class="navbar">
+      <span class="navbar-toggle" id="js-navbar-toggle">
+          <i class="fas fa-bars"></i>
+      </span>
+      <a href="/student-home/<%= user._id %>" class="logo">Exam Portal</a>
+      <ul class="main-nav" style="margin-top: 10px;" id="js-menu">
+          <li>
+            <a href="/student-home/<%= user._id %>" class="nav-links">Home</a>
+          </li>
+          <li>
+            <a href="/<%= user._id %>/myExams" class="nav-links">Registered Exams</a>
+          </li>
+          <li>
+            <a href="/logout" class="nav-links">Logout</a>
+          </li>
+
+      </ul>
+  </nav>
+
+<div class="wrapper">
+  <section class="project py-5">
+    <div class="container">
+        <div class="row my-3">
+          <div style="color: #fff;" class="col-10 mx-auto text-center">
+              <h1 class='text-uppercase'>Joined organisations</h1>
+          </div>
+      </div>
+    <div class="row" style="margin-right: -570px;margin-top: 30px;"  >
+        <!-- Single card starts -->        
+      <div class="column">
+        <div class="card" style="width: 24rem;height: 12rem;margin-right: 20px;">
+            <!-- <img class="card-img-top" src="IMG_6355.jpg" alt="Card image cap"> -->
+            <div class="card-body" style="background-color: #f9aa33;">
+              <h5 class="card-title">Enter code to join Organization</h5>
+              <form action="/join-organisation" method="POST">
+                <input type="text" class="form-control" name="joiningCode" placeholder="Enter the code" required="required"><br>
+                <div style="text-align: center;"><button type="submit" class="btn" style="background-color: #3e4041;color: #fff;">Join Now</button></div>
+              </form>
+            </div>
+          </div>
+      </div>
+      <!-- Single card ends -->
+      <% listOfRegisteredOrganisations.forEach((organisation)=>{ %>
+          <div class="column">
+            <div class="card" style="width: 24rem;height:12rem;margin-right: 20px;">
+                <!-- <img class="card-img-top" src="IMG_6355.jpg" alt="Card image cap"> -->
+                <div class="card-body"style="background-color: #f9aa33;">
+                  <h5 class="card-title"><%= organisation.Name %></h5>
+                  <p class="card-text"><%= organisation.websiteLink %> </p>
+                  <!-- <a href="#" class="btn "style="background-color: #3e4041;color: #fff;">Submit</a> -->
+                </div>
+              </div>
+        </div>
+      <% }) %>
+       
+  </div>
+</div>
+
 </body>
 </html>

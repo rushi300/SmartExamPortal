@@ -5,6 +5,7 @@ const Student         = require("../models/student");
 const Organisation = require("../models/organisation");
 const randomString = require('randomstring');
 const nodemailer = require('nodemailer');
+const bcrypt = require('bcrypt');
 
 // Login Routes
 router.get("/login", (req, res) => {
@@ -37,7 +38,7 @@ router.post('/login',
 
 router.get("/logout", (req, res) => {
     req.logOut();
-    return res.send("logged out successfully");
+    return res.redirect("/");
 });
 
 
@@ -63,11 +64,11 @@ router.post("/student_register", (req, res) => {
 
     Student.register(newStudent, req.body.password, (err, studentCreated) => {
         if (err) {
-            console.log(err);
+            console.error(err);
             res.send("errrorrrrrrrrrrrr!");
         }
         else {
-            console.log(studentCreated);
+            // console.log(studentCreated);
             res.redirect("/login");
         }
     });
@@ -85,12 +86,14 @@ router.post("/organisation_register", (req, res) => {
         email: req.body.email,
         isOrganisation: true,
         isStudent: false,
-        joiningCode: joiningCode
+        joiningCode: joiningCode,
+        Name: req.body.Name,
+        websiteLink: req.body.websiteLink
     });
 
     Organisation.register(newOrganisation, req.body.password,async (err, organisationCreated) => {
         if (err) {
-            console.log(err);
+            console.error(err);
             res.send("errrorrrrrrrrrrrr!");
         }
         else {
@@ -109,7 +112,7 @@ router.post("/organisation_register", (req, res) => {
             });
             transporter.close();
 
-            console.log(organisationCreated);
+            // console.log(organisationCreated);
             res.redirect("/login");
         }
     });
@@ -119,16 +122,29 @@ router.post("/join-organisation", (req, res) => {
     Student.findById(req.user._id, (err, foundStudent) => {
         if (err)
             return res.redirect("back");
-        
+        // console.log(req.body.joiningCode);
         Organisation.findOne({ joiningCode: req.body.joiningCode }, (err, foundOrganisation) => {
             if (err)
                 return res.redirect("back");
+            // console.log(foundOrganisation);
             foundStudent.organisations.push(foundOrganisation._id);
             foundOrganisation.students.push(foundStudent._id);
             foundStudent.save();
             foundOrganisation.save();
             return res.redirect('/student-home/' + req.user._id);
         });
+    });
+});
+
+router.get("/show-registered-organisations", (req, res) => {
+    // console.log(req.user);
+    Student.findById(req.user._id).populate("organisations").exec((err, foundStudent) => {
+        if (err)
+            return res.redirect("back");
+        
+        var listOfRegisteredOrganisations = foundStudent.organisations;
+
+        res.render("joinOrganisation", {listOfRegisteredOrganisations: listOfRegisteredOrganisations, user: req.user});
     });
 });
 

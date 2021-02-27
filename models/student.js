@@ -22,6 +22,16 @@ const StudentSchema = new mongoose.Schema({
     isOrganisation: Boolean
 });
 
+StudentSchema.methods.validPassword = function (password) {
+    console.log(password);
+    console.log(this.password);
+    if (password === this.password) {
+    return true; 
+  } else {
+    return false;
+  }
+};
+
 StudentSchema.plugin(passportLocalMongoose,{
     usernameField : "email"
 });
