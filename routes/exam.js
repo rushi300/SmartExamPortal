@@ -3,6 +3,7 @@ const router       = express.Router();
 const passport     = require("passport");
 const Student      = require("../models/student");
 const Organisation = require("../models/organisation");
+
 const Exam = require("../models/exam");
 
 router.get('/exam/new', (req,res)=>{
@@ -43,30 +44,6 @@ router.post('/exam/new', (req,res) => {
 
 
 router.get("/student-home/:id", (req, res) => {
-    // Student.findById(req.params.id).populate({
-    //     path: "organisations",
-    //     populate: {
-    //         path: "exams_conducted"
-    //     }
-    // }).exec((err, foundStudent) => {
-    //     if (err)
-    //         return res.redirect("back");
-    //     else {
-    //         Exam.find({}, (err, foundExam) => {
-    //             if (err) {
-    //                 console.error(err);
-    //             } else {
-    //                 console.log(foundStudent.organisations);
-    //                 console.log(foundStudent.organisations.email);
-    //                 // foundStudent.organisations.exams_conducted.forEach((exam) => {
-    //                 //     console.log(exam);
-    //                 // });
-    //                 res.render("studentHome", { exams: foundExam, student: foundStudent });
-    //             }
-    //         });
-    //     }
-    // });
-
     Exam.find({}, (err, foundExam) => {
         if (err)
             return res.redirect("back");
@@ -79,13 +56,6 @@ router.get("/student-home/:id", (req, res) => {
         }).exec((err, foundStudent) => {
             if (err)
                 return res.redirect("back");
-
-            console.log(foundStudent.organisations[0].exams_conducted[0].name);
-            foundStudent.organisations.forEach((organisation) => {
-                organisation.exams_conducted.forEach((exam) => {
-                    console.log(exam);
-                })
-            });
             res.render("studentHome", { exams: foundExam, student: foundStudent });
         });
     })
@@ -144,6 +114,8 @@ router.get("/:student_id/myExams",(req,res)=>{
 // router.get("/exam/:id/edit",(req,res)=>{
  // 
 // })
+
+// send mail when subscribed for examination!
 
 // student joins organisation(joining code) (1)
 // students subscribes exam (2)
