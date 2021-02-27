@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <p><%= user.joiningCode %></p>
+    <p>This is Organization pagee!</p>
+    <% array.forEach((element) => { %>
+        <p><%= element._id %></p>
+        <p><%= element.name %></p>
+        <br>
+    <% }) %>
+    <form action="/exam/new" method="GET">
+        <button>Create Exam</button>
+    </form>
+</body>
+</html>

@@ -2,7 +2,9 @@ const express      = require("express");
 const router       = express.Router();
 const passport     = require("passport");
 const Student         = require("../models/student");
-const Organisation         = require("../models/organisation");
+const Organisation = require("../models/organisation");
+const randomString = require('randomstring');
+const nodemailer = require('nodemailer');
 
 // Login Routes
 router.get("/login", (req, res) => {
@@ -11,30 +13,23 @@ router.get("/login", (req, res) => {
 
 router.post('/login', 
     passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
-        console.log("current user object: ");
-        console.log(req.user);
-        console.log(req.params);
         if (req.user.isStudent) {
             Student.findById(req.params.id, (err, student) => {
                 if (err) {
-                    console.log(err);
                     return res.redirect('/login');
                 }
                 else {
-                    console.log("inside else of student");
-                    res.send('logged in via student');
+                    res.redirect("/student-home/" + req.user.id);
                 }
             });
         }
         if (req.user.isOrganisation) {
             Organisation.findById(req.params.id, (err, organisation) => {
                 if (err) {
-                    console.log(err);
                     return res.redirect('/login');
                 }
                 else {
-                    console.log("inside else of organisation");
-                    res.send('logged in via organisation');
+                    res.redirect("/organisation-home/" + req.user.id);
                 }
             });
         }
@@ -84,22 +79,56 @@ router.get("/organisation_register", (req, res) => {
     res.render("organisationRegister");
 });
 
-router.post("/organisation_register", (req, res) => {
+router.post("/organisation_register", (req, res) => { 
+    var joiningCode = randomString.generate(6);
     var newOrganisation = new Organisation({
         email: req.body.email,
         isOrganisation: true,
-        isStudent: false
+        isStudent: false,
+        joiningCode: joiningCode
     });
 
-    Organisation.register(newOrganisation, req.body.password, (err, organisationCreated) => {
+    Organisation.register(newOrganisation, req.body.password,async (err, organisationCreated) => {
         if (err) {
             console.log(err);
             res.send("errrorrrrrrrrrrrr!");
         }
         else {
+            var transporter = nodemailer.createTransport({
+                service: "Gmail",
+                auth: {
+                    user: "parthshah1936@gmail.com",
+                    pass: "adgzcbqet19",
+                },
+            });
+            await transporter.sendMail({
+                from: "parthshah1936@gmail.com",
+                to: organisationCreated.email,
+                subject: "Your Unique joining code",
+                text:  "Your Unique joining code is " + joiningCode + "\nShare this code with the students to join your organisation."
+            });
+            transporter.close();
+
             console.log(organisationCreated);
             res.redirect("/login");
         }
+    });
+});
+
+router.post("/join-organisation", (req, res) => {
+    Student.findById(req.user._id, (err, foundStudent) => {
+        if (err)
+            return res.redirect("back");
+        
+        Organisation.findOne({ joiningCode: req.body.joiningCode }, (err, foundOrganisation) => {
+            if (err)
+                return res.redirect("back");
+            foundStudent.organisations.push(foundOrganisation._id);
+            foundOrganisation.students.push(foundStudent._id);
+            foundStudent.save();
+            foundOrganisation.save();
+            return res.redirect('/student-home/' + req.user._id);
+        });
     });
 });
 

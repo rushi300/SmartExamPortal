@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <form action="/join-organisation" method="POST">
+        <p>Enter the code given by the organisation</p>
+        <input type="text" name="joiningCode" id="joiningCode" placeholder="Enter code">
+        <button type="submit">Join</button>
+    </form>
+    <p>This is studentHome page!!</p>
+    <p><% exams.forEach((exam) => { %>
+        <% if (exam.isPublic){ %>
+            <%= exam.name %>  
+            <a href="/exam/<%= exam._id %>">Click here for more info</a>
+        <% } %>
+    <% }) %></p>
+    <p>
+        <% student.organisations.forEach((organisation) => { %>
+            <% organisation.exams_conducted.forEach((exam) => { %>
+                <% if (!exam.isPublic){ %>
+                    <%= exam.name %>  
+                    <a href="/exam/<%= exam._id %>">Click here for more info </a>
+                <% } %>
+            <% }) %>
+        <% }) %>    
+    </p>
+    
+    <a href="/<%= student._id %>/myExams">My Exams</a>
+</body>
+</html>

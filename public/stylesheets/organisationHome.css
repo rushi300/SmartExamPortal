@@ -1,0 +1,318 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #232f34;
+  text-align: center;
+  font-family: "Source Sans Pro", Helvetica;
+}
+
+#container {
+  margin: 100px auto;
+  width: 90%;
+  text-align: left;
+  position: relative;
+}
+
+.widget {
+  background-color: rgba(39, 69, 82, 0.7);
+  font: 11pt Georgia, Times, serif;
+  color: #fff;
+  padding: 7px;
+
+  /*margin: 20px;*/
+  width: 100%;
+}
+
+.widget ul {
+  list-style-position: inside;
+}
+
+.widget h5 {
+  font-size: 14pt;
+  margin: 5px;
+}
+
+.new-widget {
+  margin: 0px;
+
+  border: 1px solid #ddd;
+  border-top: 0;
+  background-color: #fff;
+  /*padding: 7px;*/
+  width: 100%;
+  clear: both;
+}
+.new-widget ul {
+  display: none;
+}
+
+.tab-wrapper {
+  /*  margin-left: 1px; */
+
+  width: 1000px;
+  padding: 0;
+  /*  height: 0px; */
+
+  /*  background: #1abc9c;  */
+}
+
+.tab {
+  /* width: 100px;*/
+  padding: 8px 10px;
+  margin-right: 5px;
+  font-size: 0.9em;
+  /*   border: 1px solid red; */
+  border-radius: 10px 10px 0 0;
+  /* height: 33px; */
+  float: left;
+  background: #eee;
+  text-transform: capitalize;
+  color: #fff;
+  text-align: center;
+  /* line-height: 2.0em; */
+  cursor: pointer;
+  list-style: none !important;
+  transition: all 200ms;
+  /*   border-right: 0.125rem solid #16a085; */
+  border-top: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+}
+
+.tab:hover {
+  background: #f9aa33;
+  color: #000;
+}
+
+.active-tab {
+  background: #f9aa33;
+  color: #000;
+}
+
+.active-tab:hover {
+}
+
+.tab-content {
+  padding: 0 0;
+}
+
+/* TABLE STYLING */
+
+.group-table caption {
+  background: #f9aa33;
+  color: #000;
+  padding: 8px;
+  font-size: 1.4em;
+}
+
+.group-table {
+  border-top: 1px solid #ddd;
+  width: 100%;
+  /*  border:1px solid #ddd; */
+  /*    border-top: none;  */
+  border-collapse: collapse;
+  padding: 5px;
+  text-align: center;
+}
+.group-table th {
+  /*  border:1px solid #ddd;
+      border-top: none; */
+  padding: 10px 5px;
+  font-weight: normal;
+  background: #f9aa33;
+  color: #000;
+}
+.group-table td {
+  /*  border:1px solid #ddd; */
+  padding: 10px 2px;
+}
+
+td:nth-child(3) {
+  /* min-width: 90px; */
+}
+
+.group-table th,
+.group-table td {
+  border-right: 1px solid #ddd;
+}
+
+.group-table th:last-child,
+.group-table td:last-child {
+  border-right: none;
+}
+
+.group-table tr:nth-child(odd) {
+  background: #4a6572;
+}
+.group-table tr:nth-child(even) {
+  background: #9cb4c2;
+}
+
+#morning .group-table td:nth-child(3) {
+  background: #fff;
+}
+
+.group-table td.align-bottom {
+  vertical-align: bottom;
+  padding: 0;
+}
+
+.group-table td.align-top {
+  vertical-align: top;
+  padding: 0;
+}
+
+#morning .group-table td:nth-child(3),
+#afternoon .group-table td:nth-child(3),
+#evening .group-table td:nth-child(3) {
+  background: #fff;
+}
+
+#weekend .group-table td:nth-child(2) {
+  background: #fff;
+}
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
+  font-size: 62.5%;
+  font-size: 10px;
+}
+/*-- Inspiration taken from abdo steif -->
+  /* --> https://codepen.io/abdosteif/pen/bRoyMb?editors=1100*/
+
+/* Home section */
+
+/* Media qurey section */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    margin: 0;
+  }
+}
+
+/* Animation */
+/* Inspiration taken from Dicson https://codemyui.com/simple-hamburger-menu-x-mark-animation/ */
+
+.affix {
+  padding: 0;
+  background-color: #111;
+}
+
+.myH2 {
+  text-align: center;
+  font-size: 4rem;
+}
+.myP {
+  text-align: justify;
+  padding-left: 15%;
+  padding-right: 15%;
+  font-size: 20px;
+}
+@media all and (max-width: 700px) {
+  .myP {
+    padding: 2%;
+  }
+}
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #232f34;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  /* background-color: #232f34; */
+}
+/* 
+body {
+    background-color: #232f34;
+    font-family: 'Josefin Sans', sans-serif;
+} */
+
+.navbar {
+  /* position: fixed; */
+  font-size: 18px;
+  background-image: linear-gradient(260deg, #232f34 0%, #4a6572 100%);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 10px;
+}
+
+.main-nav {
+  list-style-type: none;
+  display: none;
+}
+
+.nav-links,
+.logo {
+  text-decoration: none;
+  color: #d5e1e8;
+}
+
+.main-nav li {
+  text-align: center;
+  margin: 15px auto;
+}
+
+.logo {
+  display: inline-block;
+  font-size: 22px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.navbar-toggle {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 24px;
+}
+
+.active {
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0;
+    height: 70px;
+    align-items: center;
+  }
+
+  .main-nav {
+    display: flex;
+    margin-right: 30px;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .main-nav li {
+    margin: 0;
+  }
+
+  .nav-links {
+    margin-left: 40px;
+  }
+
+  .logo {
+    margin-top: 0;
+  }
+
+  .navbar-toggle {
+    display: none;
+  }
+
+  .logo:hover,
+  .nav-links:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+}

@@ -8,6 +8,7 @@ const ExamSchema = new mongoose.Schema({
     date               : String,
     startTime          : String,
     endTime            : String,
+    medium             : String,
     isPublic           : Boolean,
     students_registered: [{
         type           : mongoose.Schema.Types.ObjectId,

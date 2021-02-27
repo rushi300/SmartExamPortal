@@ -18,6 +18,7 @@ mongoose.connect("mongodb://localhost/testing",
     });
                     
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended:false}));

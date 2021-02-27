@@ -15,7 +15,8 @@ const OrganisationSchema = new mongoose.Schema({
         ref         : "Exam"
     }],
     isStudent: Boolean,
-    isOrganisation: Boolean
+    isOrganisation: Boolean,
+    joiningCode: String
 });
 
 
