@@ -7,13 +7,19 @@
     <title>register</title>
 </head>
 <body>
-    <p>This is register page</p>
-    <form action="/register" method="post">
+    <p>This is organisation register page</p>
+    <form action="/organisation_register" method="post">
+        <div>
+            <input name='Name' type='text' required placeholder="Name of organisation">
+        </div>
         <div>
             <input name='email' type='email' required placeholder="email id">
         </div>
         <div>
             <input name='password' type='password' required placeholder="password">
+        </div>
+        <div>
+            <input name="websiteLink" type='text' required placeholder="Website">
         </div>
         <button type="submit">Register</button>
     </form>

@@ -5,12 +5,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 var Student = require('./models/student');
+var Organisation = require('./models/organisation');
 
+var indexRoutes = require("./routes/index");
 
 mongoose.connect("mongodb://localhost/testing", 
                     { useNewUrlParser: true, 
                     useUnifiedTopology: true, 
-        useCreateIndex: true
+                    useCreateIndex: true
     });
                     
 app.set("view engine", "ejs");
@@ -30,48 +32,17 @@ passport.use(Student.createStrategy());
 passport.serializeUser(Student.serializeUser());
 passport.deserializeUser(Student.deserializeUser());
 
-app.get("/login", (req, res) => {
-    res.render('login');
-});
+// passport.use(Organisation.createStrategy());
+// passport.serializeUser(Organisation.serializeUser());
+// passport.deserializeUser(Organisation.deserializeUser());
 
-app.post("/login", (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-        if (err) {
-            return next(err);
-        }
-        if (!user) {
-            return res.redirect('/login');
-        }
-    req.logIn(user, (err) => {
-        if (err) {
-            console.log(err);
-            return next(err);
-        }
-      return res.send("success");
-    });
-  })(req, res, next);
-});
 
-app.get("/register", (req, res) => {
-    res.render("register");
-});
+app.use(indexRoutes);
 
-app.post("/register", (req, res) => {
-    var newStudent = new Student({
-        email: req.body.email
-    });
 
-    Student.register(newStudent, req.body.password, (err, studentCreated) => {
-        if (err) {
-            console.log(err);
-            res.send("errrorrrrrrrrrrrr!");
-        }
-        else {
-            console.log(studentCreated);
-            res.redirect("/login");
-        }
-    });
-});
+app.get("/", (req,res) => {
+    res.redirect("/login")
+})
 
 app.listen(process.env.PORT || 3000, process.env.IP, function(){
     console.log("The Server is listening on " + 3000);

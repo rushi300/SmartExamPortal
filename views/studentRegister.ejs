@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+</head>
+<body>
+    <p>This is register page</p>
+    <form action="/student_register" method="post">
+        <div>
+        <input type="text" name="firstName" placeholder="First Name">
+        </div>
+        <div>
+            <input type="text" name="middleName" placeholder="Middle Name">
+        </div>
+        <div>
+            <input type="text" name="lastName" placeholder="Last Name">
+        </div>    
+        <div>
+            <input name='email' type='email' required placeholder="email id">
+        </div>
+        <div>
+            <input name='password' type='password' required placeholder="password">
+        </div>
+        <div>
+            <input type="date" name="dob" required >
+        </div>    
+        <div>
+            <select name="gender" type="text" required placeholder="Gender"> 
+                <option>Male</option>
+                <option>Female</option>
+                <option>Others</option>
+            </select>
+        </div>    
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
