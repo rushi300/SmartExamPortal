@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <h1 >Edit <%=exam.name %></h1>
+        <div >
+            <form action="/exam/new<%= exam._id %>?_method=PUT" method="POST">
+                <div>
+                    <input type="text" name="exam[name]" value="<%= exam.name %>">
+                </div>
+                <div>
+                    <input type="date" name="exam[date]" value="<%=exam.date %>" >
+                </div>
+                <div>
+                    <input type="text" name="exam[link]" value="<%= exam.link %>">
+                </div>
+                <div>
+                    <input type="text" name="exam[description]" value="<%= exam.description %>">
+                </div>
+                <div>
+                    <input type="text" name="exam[startTime]" value="<%= exam.startTime %>">
+                </div>
+                <div>
+                    <input type="text" name="exam[endTime]" value="<%= exam.endTime %>">
+                </div>
+                <div>
+                    <button >Submit!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

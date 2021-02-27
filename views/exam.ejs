@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 style="text-align: center">Create an Exam</h1>
+            <div>
+                <form action="/exam/new" method="POST">
+                    <div>
+                        <input type="text" name="name" placeholder="name">
+                    </div>
+                    <div>
+                        <input type="text" name="link" placeholder="Registration Link">
+                    </div>
+                    <div>
+                        <input type="date" name="date" placeholder="Date of Examination">
+                    </div>
+                    <div>
+                        <input type="text" name="description" placeholder="description">
+                    </div>
+                    <div>
+                        <input type="text" name="startTime" placeholder="Start of Exam">
+                    </div>
+                    <div>
+                        <input type="text" name="endTime" placeholder="End of Exam">
+                    </div>
+                    <div>
+                        <input type="checkbox"  name="isPublic" value="true">
+                        <label >Private</label>
+                        <input type="checkbox" name="isPublic" value="false">
+                        <label > Public</label>
+                    </div>
+                    <div>
+                        <button>Enter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

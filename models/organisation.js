@@ -2,10 +2,20 @@ const mongoose              = require("mongoose");
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const OrganisationSchema = new mongoose.Schema({
-    Name:String,
-    email: {type: String, unique: true , required: true},
-    password: String,
-    websiteLink: String
+    Name            :String,
+    email           : {type: String, unique: true , required: true},
+    password        : String,
+    websiteLink     : String,
+    students        : [{
+        type        : mongoose.Schema.Types.ObjectId,
+        ref         : "Student"
+    }],
+    exams_conducted : [{
+        type        : mongoose.Schema.Types.ObjectId,
+        ref         : "Exam"
+    }],
+    isStudent: Boolean,
+    isOrganisation: Boolean
 });
 
 
