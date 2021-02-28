@@ -1,11 +1,11 @@
-const express      = require("express");
+require('dotenv/config');
+const express = require("express");
 const router       = express.Router();
 const passport     = require("passport");
 const Student         = require("../models/student");
 const Organisation = require("../models/organisation");
 const randomString = require('randomstring');
 const nodemailer = require('nodemailer');
-const bcrypt = require('bcrypt');
 
 // Login Routes
 router.get("/login", (req, res) => {
@@ -102,7 +102,7 @@ router.post("/organisation_register", (req, res) => {
                 service: "Gmail",
                 auth: {
                     user: "parthshah1936@gmail.com",
-                    pass: "adgzcbqet19",
+                    pass: process.env.password,
                 },
             });
             await transporter.sendMail({

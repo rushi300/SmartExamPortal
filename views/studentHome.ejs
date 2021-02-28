@@ -53,7 +53,7 @@
                                 <h2 class="articles__title"><%= exam.name %></h2>
                                 <p><%= exam.medium %></p>
                                 <!-- <p><%=exam.description%> </p> -->
-                                <a href="/exam/<%= exam._id %>" class="btn " style="background-color: #696969;color: #fff;">Read More</a>
+                                <a href="/exam/<%= exam._id %>/<%= student._id %>" class="btn " style="background-color: #696969;color: #fff;">Read More</a>
                                 <div style="text-align: center;" class="articles__footer">
                                    <time style="text-align: center;"><%= exam.date %>  </time>
                                 </div>
@@ -62,7 +62,7 @@
                                 <h2 class="articles__title"><%= exam.name %></h2>
                                 <p><%= exam.medium %></p>
                                 <!-- <p><%=exam.description%> </p> -->
-                                <a href="/exam/<%= exam._id %>" class="btn " style="background-color: #696969;color: #fff;">Read More</a>
+                                <a href="/exam/<%= exam._id %>/<%= student._id %>" class="btn " style="background-color: #696969;color: #fff;">Read More</a>
                                 <!-- <div style="text-align: center;"class="articles__footer"> -->
                                    <time style="margin-top: 8px;"><%= exam.date %></time>
                                 <!-- </div> -->

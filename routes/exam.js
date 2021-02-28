@@ -1,4 +1,5 @@
-const express      = require("express");
+require('dotenv/config');
+const express = require("express");
 const router       = express.Router();
 const passport     = require("passport");
 const Student      = require("../models/student");
@@ -70,8 +71,7 @@ router.get("/student-home/:id", (req, res) => {
     });
     console.log("req.params.id: ");
     console.log(req.params.id);
-    console.log(req.user._id);
-    Student.findById(req.user._id).populate({
+    Student.findById(req.params.id).populate({
         path: "organisations",
         populate: {
             path: "exams_conducted"
@@ -105,7 +105,7 @@ router.post("/subscribe/:clicked_exam_id", (req, res) => {
                 service: "Gmail",
                 auth: {
                     user: "parthshah1936@gmail.com",
-                    pass: "adgzcbqet19",
+                    pass: process.env.password,
                 },
             });
             await transporter.sendMail({
@@ -127,13 +127,13 @@ router.post("/subscribe/:clicked_exam_id", (req, res) => {
     });
 });
 
-router.get("/exam/:id",function(req,res){
+router.get("/exam/:id/:student_id",function(req,res){
     Exam.findById(req.params.id,(err,foundExam)=>{
         if(err){
             console.log(err);
         } else {
             // console.log(foundExam);
-            res.render("viewExam", { exam: foundExam , user: req.user});
+            res.render("viewExam", { exam: foundExam , id: req.params.student_id});
         }
     })
 });

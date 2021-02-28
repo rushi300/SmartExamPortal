@@ -12,7 +12,7 @@ var Organisation = require('./models/organisation');
 var indexRoutes = require("./routes/index");
 var examRoutes = require("./routes/exam");
 
-mongoose.connect("mongodb://localhost/test1", 
+mongoose.connect("mongodb://localhost/test2", 
                     {useNewUrlParser: true, 
                     useUnifiedTopology: true, 
                     useCreateIndex: true
@@ -73,7 +73,7 @@ app.get("/", (req,res) => {
     res.redirect("/login")
 })
 
-app.listen(process.env.PORT || 3000, process.env.IP, function(){
-    console.log("The Server is listening on " + 3000);
+app.listen(process.env.PORT || 1000, process.env.IP, function(){
+    console.log("The Server is listening on " + 1000);
 });
 
