@@ -8,12 +8,14 @@ const moment = require('moment');
 
 const Exam = require("../models/exam");
 
-router.get('/exam/new', (req,res)=>{
-    res.render("exam",{user:req.user});
+router.get('/exam/new/:id', (req,res)=>{
+    Organisation.findById(req.params.id, (err, foundOrganisation) => {
+        console.log(foundOrganisation);
+        res.render("exam",{id: req.params.id, user: foundOrganisation});
+    });
 });
 
-router.post('/exam/new', (req, res) => {
-    // console.log(req.user);
+router.post('/exam/new/:id', (req, res) => {
     var startTime = moment(req.body.startTime, "H:mm");
     var endTime = moment(req.body.endTime, "H:mm");
     var duration = moment.duration(endTime.diff(startTime));
@@ -34,21 +36,21 @@ router.post('/exam/new', (req, res) => {
         endTime: req.body.endTime,
         duration: hours + " hours " + minutes + " minutes",
         isPublic: isPublic,
-        organizer: req.user.Name
+        organizer: req.body.Name
     });
 
     Exam.create(newExam, (err,newlyCreated)=>{
         if(err){
             return res.redirect("back");
         }else{
-            Organisation.findById(req.user._id, (err, foundOrganisation) => {
+            Organisation.findById(req.params.id, (err, foundOrganisation) => {
                 if (err) {
                     return res.redirect("back");
                 }
                 else {
                     foundOrganisation.exams_conducted.push(newlyCreated._id);
                     foundOrganisation.save((err)=>{
-                        return res.redirect("/organisation-home/" + req.user._id);
+                        return res.redirect("/organisation-home/" + req.params.id );
                     });
                 }
             })
@@ -59,21 +61,26 @@ router.post('/exam/new', (req, res) => {
 
 
 router.get("/student-home/:id", (req, res) => {
-    Exam.find({}, (err, foundExam) => {
+    var foundExam;
+    Exam.find({}, (err, foundExams) => {
         if (err)
             return res.redirect("back");
-        
-        Student.findById(req.params.id).populate({
-            path: "organisations",
-            populate: {
-                path: "exams_conducted"
-            }
-        }).exec((err, foundStudent) => {
-            if (err)
-                return res.redirect("back");
-            // console.log(foundExam);
-            res.render("studentHome", { exams: foundExam, student: foundStudent });
-        });
+        console.log(foundExams);
+        foundExam = foundExams;
+    });
+    console.log("req.params.id: ");
+    console.log(req.params.id);
+    console.log(req.user._id);
+    Student.findById(req.user._id).populate({
+        path: "organisations",
+        populate: {
+            path: "exams_conducted"
+        }
+    }).exec((err, foundStudent) => { 
+        if (err)
+            return res.redirect("back");
+        console.log(foundStudent);
+        res.render("studentHome", { exams: foundExam, student: foundStudent });
     });
 });
 
@@ -83,8 +90,8 @@ router.get("/organisation-home/:id", async (req, res) => {
             return res.redirect("back");
         }
         var array = foundOrganisation.exams_conducted;
-        
-        res.render("organisationHome", {array: array, user: foundOrganisation});
+        // console.log(foundOrganisation);
+        res.render("organisationHome", { array: array, user: foundOrganisation });
     });
 });
                 
@@ -141,25 +148,5 @@ router.get("/:student_id/myExams",(req,res)=>{
         }
     })
 });
-
-// router.get("/exam/:id/edit",(req,res)=>{
- // 
-// })
-
-// send mail when subscribed for examination!
-
-// student joins organisation(joining code) (1)
-// students subscribes exam (2)
-// student gets notfied (2) // smart exam portal sends mail
-// display to students public exams + organisation exams (1)
-// my subscribed exams (2)
-// upcoming live completed (independent but optional)
-
-
-// student subscribes exam
-// student gets notfied
-// display to students all exams 
-// my subscribed exams
-
 
 module.exports = router;

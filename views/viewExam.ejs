@@ -12,7 +12,7 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 
-<body style="background-color: #4a6572;" >
+<body style="background-color: #424242;" >
    
      <nav class="navbar">
         <span class="navbar-toggle" id="js-navbar-toggle">
@@ -33,11 +33,11 @@
         </ul>
     </nav>
 <div style="align-items: center;" class="container mt-5">
-    <div class="jumbotron align-items-center" style="background-color: #3e4041;">
-        <h2 style="color: #fff;" class="display-4"><%= exam.name %></h2>
-        <h6 style="color: rgba(255, 255, 255,0.8);margin-top: 9px;" class="display-6"><%= exam.organizer%></h6>
+    <div class="jumbotron align-items-center" style="background-color: #c1d1e1;">
+        <h2 style="color: #424242;" class="display-4"><%= exam.name %></h2>
+        <h6 style="color: #424242;margin-top: 9px;" class="display-6">Organised By <%= exam.organizer%></h6>
 
-        <hr  style="color: #fff;" class="my-4">
+        <hr  style="color: #424242;" class="my-4">
             <div class="row">
                 <div class="col-md-8">
                     <b>
@@ -45,14 +45,17 @@
                     </b>
                     <p><%= exam.description %></p>
                     <br>
-                    <p><%=exam.date%></p>
+                    <p>Date :<%=exam.date%></p>
                    
                     <p>Exam starts at <%=exam.startTime%> and is of duration <%=exam.duration %></p>
-                   
-                    <a href="<%= exam.link %>" class="btn" style="background-color: #f9aa33;color: #3e4041;margin-left:5px;padding:5x;margin-top:20px;">Registration Link</a>
+                    <!-- <a href="<%= exam.link %>" class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:5px;padding:5x;margin-top:20px;">Registration Link</a> -->
+                    <span>
+                    
                     <form action="/subscribe/<%= exam._id %>" method="POST">
-                        <button type="submit">Subscribe </button>
+                        <a href="<%= exam.link %>" class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:2px;padding:5x;margin-top:20px;">Registration Link</a>
+                        <button class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:5px;padding:5x;margin-top:20px;" type="submit">Subscribe </button>
                     </form>   
+                </span>
 
                 </div>
             

@@ -4,7 +4,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const OrganisationSchema = new mongoose.Schema({
     Name            : String,
     email           : {type: String, unique: true , required: true},
-    password        : String,
+    pass            : String,
     websiteLink     : String,
     students        : [{
         type        : mongoose.Schema.Types.ObjectId,

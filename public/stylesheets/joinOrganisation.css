@@ -1,23 +1,23 @@
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #232f34;
+  background-color: #424242;
 }
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  /* background-color: #232f34; */
+  /* background-color: #53585a; */
 }
 /* 
 body {
-    background-color: #232f34;
+    background-color: #53585a;
     font-family: 'Josefin Sans', sans-serif;
 } */
 
 .navbar {
   /* position: fixed; */
   font-size: 18px;
-  background-image: linear-gradient(260deg, #232f34 0%, #4a6572 100%);
+  background-image: linear-gradient(260deg, #747c81 0%, #747c81 100%);
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding-bottom: 10px;
 }
@@ -30,7 +30,7 @@ body {
 .nav-links,
 .logo {
   text-decoration: none;
-  color: #d5e1e8;
+  color: #ffffff;
 }
 
 .main-nav li {
@@ -98,15 +98,15 @@ body {
 
 /* Projects Start */
 .project {
-  background-color: #232f34;
+  background-color: #424242;
 }
 .project-container {
-  background: #f9aa33;
+  background: #e79f39;
   position: relative;
   overflow: hidden;
 }
 .donation {
-  background: #f9aa33;
+  background: #e79f39;
   color: black;
   padding: 3px 3.5px;
   position: absolute;
@@ -131,7 +131,7 @@ body {
 .outline:before {
   content: "";
   position: absolute;
-  border: #ca8a2a solid 4px;
+  /* border: #ca8a2a solid 4px; */
   top: 4px;
   left: 4px;
   right: 4px;
@@ -156,7 +156,7 @@ body {
 .grow:hover,
 .grow:focus,
 .grow:active {
-  box-shadow: 0 10px 10px 5px #f9aa33;
+  box-shadow: 0 10px 10px 5px #e79f39;
   transform: scale(1.1);
 }
 /* Project Ends */

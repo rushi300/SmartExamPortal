@@ -17,8 +17,8 @@
             <i class="fas fa-bars"></i>
         </span>
         <a href="/organisation-home/<%= user._id %>"  class="logo">Exam Portal</a>
+        <!-- <a href="#"  class="logo">Exam Portal</a> -->
         <ul class="main-nav" style="margin-top: 10px;" id="js-menu">
-         
             <li>
                 <a href="/exam/new" class="nav-links">Create an Exam</a>
             </li>
@@ -29,11 +29,12 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <form action="/exam/new" method="POST">
+                    <form action="/exam/new/<%= user._id %>" method="POST">
                             <div class="col-1.5">
                                 <div class="input-group">
                                     <label class="label">Name of the Exam</label>
                                     <input class="input--style-4" type="text" placeholder="" name="name">
+                                    <input type="hidden" name="Name" value="<%= user.Name %>">
                                 </div>
                             </div>
                             
@@ -46,7 +47,7 @@
                             </div>
                         </div>
                         <!-- <div class="row row-space"> -->
-                            <div class="col-1.5">
+                            <div class="col-1">
                                 <div class="input-group">
                                     <label class="label">Paste the registration Link</label>
                                     <input class="input--style-4" type="text" placeholder="" name="link">
@@ -58,7 +59,7 @@
                             <div class="col-3">
                                 <div class="input-group">
                                     <label class="label">Date</label>
-                                    <input style="padding: 0px 20px;" class="input--style-4" type="date" name="date">
+                                    <input style="padding: 0px 20px;" class="input--style-4" min= todayDate type="date" name="date">
                                 </div>
                             </div>
                             <div class="col-3">
@@ -90,7 +91,7 @@
                             </div>
                         </div>
                         <div class="" style="text-align: center;margin-top: 20px;">
-                            <button style="background-color: #4a6572;color: #fff;" class="btn btn--radius-2 btn--blue"  type="submit">Create the Exam</button>
+                            <button style="background-color: #e79f39;color: #000;" class="btn btn--radius-2 btn--blue"  type="submit">Create the Exam</button>
                         </div>
                         <br>
                         
@@ -99,7 +100,16 @@
             </div>
         </div>
     </div>
+    <script>
+        var today = new Date();
+        var dd = today. getDate();
+        var mm = today. getMonth()+1; //January is 0 so need to add 1 to make it 1!
+        var yyyy = today. getFullYear();
+        if(dd<10){
+        dd='0'+ dd; 
+        }
+        todayDate = yyyy+"-"+mm+"-"+dd;
+    </script>
 
 </body>
 </html>
-<!-- end document-->

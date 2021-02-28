@@ -43,11 +43,11 @@
       <div class="column">
         <div class="card" style="width: 24rem;height: 12rem;margin-right: 20px;">
             <!-- <img class="card-img-top" src="IMG_6355.jpg" alt="Card image cap"> -->
-            <div class="card-body" style="background-color: #f9aa33;">
+            <div class="card-body" style="background-color: #e79f39;">
               <h5 class="card-title">Enter code to join Organization</h5>
               <form action="/join-organisation" method="POST">
                 <input type="text" class="form-control" name="joiningCode" placeholder="Enter the code" required="required"><br>
-                <div style="text-align: center;"><button type="submit" class="btn" style="background-color: #3e4041;color: #fff;">Join Now</button></div>
+                <div style="text-align: center;"><button type="submit" class="btn" style="background-color: #424242;color: #fff;">Join Now</button></div>
               </form>
             </div>
           </div>
@@ -55,9 +55,9 @@
       <!-- Single card ends -->
       <% listOfRegisteredOrganisations.forEach((organisation)=>{ %>
           <div class="column">
-            <div class="card" style="width: 24rem;height:12rem;margin-right: 20px;">
+            <div class="card" style="width: 24rem;height:12rem;margin-right: 20px;background-color: #e79f39;"">
                 <!-- <img class="card-img-top" src="IMG_6355.jpg" alt="Card image cap"> -->
-                <div class="card-body"style="background-color: #f9aa33;">
+                <div style="text-align: center;" class="card-body"style="background-color: #e79f39;">
                   <h5 class="card-title"><%= organisation.Name %></h5>
                   <p class="card-text"><%= organisation.websiteLink %> </p>
                   <!-- <a href="#" class="btn "style="background-color: #3e4041;color: #fff;">Submit</a> -->

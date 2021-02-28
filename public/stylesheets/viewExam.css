@@ -5,7 +5,8 @@ h2 {
 .navbar {
   /* position: fixed; */
   font-size: 18px;
-  background-image: linear-gradient(260deg, #232f34 0%, #4a6572 100%);
+  /* background-image: linear-gradient(260deg, #53585a 0%, #53585a 100%); */
+  background-color: #747c81;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding-bottom: 10px;
 }
@@ -18,7 +19,7 @@ h2 {
 .nav-links,
 .logo {
   text-decoration: none;
-  color: #d5e1e8;
+  color: #fff;
 }
 
 .main-nav li {

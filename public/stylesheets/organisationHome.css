@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: #232f34;
+  background-color: #424242;
   text-align: center;
   font-family: "Source Sans Pro", Helvetica;
 }
@@ -16,10 +16,10 @@ body {
 }
 
 .widget {
-  background-color: rgba(39, 69, 82, 0.7);
+  background-color: #747c81;
   font: 11pt Georgia, Times, serif;
   color: #fff;
-  padding: 7px;
+  padding: 4px;
 
   /*margin: 20px;*/
   width: 100%;
@@ -82,12 +82,12 @@ body {
 }
 
 .tab:hover {
-  background: #f9aa33;
+  background: #e79f39;
   color: #000;
 }
 
 .active-tab {
-  background: #f9aa33;
+  background: #e79f39;
   color: #000;
 }
 
@@ -101,7 +101,7 @@ body {
 /* TABLE STYLING */
 
 .group-table caption {
-  background: #f9aa33;
+  background: #e79f39;
   color: #000;
   padding: 8px;
   font-size: 1.4em;
@@ -121,7 +121,7 @@ body {
       border-top: none; */
   padding: 10px 5px;
   font-weight: normal;
-  background: #f9aa33;
+  background: #e79f39;
   color: #000;
 }
 .group-table td {
@@ -144,10 +144,10 @@ td:nth-child(3) {
 }
 
 .group-table tr:nth-child(odd) {
-  background: #4a6572;
+  background: #424242;
 }
 .group-table tr:nth-child(even) {
-  background: #9cb4c2;
+  background: #747c81;
 }
 
 #morning .group-table td:nth-child(3) {
@@ -221,24 +221,26 @@ body {
 }
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #232f34;
+  background-color: #424242;
 }
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  /* background-color: #232f34; */
+  /* background-color: #53585a; */
 }
 /* 
 body {
-    background-color: #232f34;
+    background-color: #53585a;
     font-family: 'Josefin Sans', sans-serif;
 } */
 
 .navbar {
   /* position: fixed; */
   font-size: 18px;
-  background-image: linear-gradient(260deg, #232f34 0%, #4a6572 100%);
+  /* background-image: linear-gradient(260deg, #53585a 0%, #4a6572 100%);
+  0 */
+  background-color: #747c81;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding-bottom: 10px;
 }
@@ -251,7 +253,7 @@ body {
 .nav-links,
 .logo {
   text-decoration: none;
-  color: #d5e1e8;
+  color: rgb(255, 255, 255);
 }
 
 .main-nav li {

@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/stylesheets/myExams.css">
 
 </head>
-<body  style="background-color: #232f34;">
+<body  style="background-color: #424242;">
 
     <!-- Navbar begins -->
     <nav class="navbar">
@@ -19,7 +19,7 @@
       <a href="/student-home/<%= user._id %>" class="logo">Exam Portal</a>
       <ul class="main-nav" style="margin-top: 10px;" id="js-menu">
           <li>
-              <a href="/student-home/<%= user._id %>" class="nav-links">Home</a>
+              <a href="/student-home/<%= user._id %>" class="nav-links">Home Page</a>
           </li>
           
           <li>
@@ -41,18 +41,20 @@
           </div>
       </div>
       <!-- SIngle card starts -->
-    <% exams.forEach((exam)=>{  %> 
+    
     <div class="row" style="margin-right: -570px;margin-top: 30px;">
-        <div class="column">
-            <div class="card" style="width: 24rem;height:16rem;margin-right: 20px;">
+      <% exams.forEach((exam)=>{  %> 
+        <div class=" column col-10 col-md-6 col-lg-4 ">
+            <div class="card" style="width: 24rem;height:16rem;margin-right:0px;">
                 <!-- <img class="card-img-top" src="IMG_6355.jpg" alt="Card image cap"> -->
-                <div class="card-body"style="background-color: #f9aa33;">
-                   
-                <h5 class="card-title"><%= exam.name %></h5>  
+                 
+                <div class="card-body"style="background-color: #e79f39;">
+                    <h2 class="card-title" ><%= exam.name %></h2> 
+                
                 <!-- add duration @parth -->
-                <p class ="card-text"><%=exam.organizer %></p>
-              <p class="card-text"><%= exam.description %><br><%=exam.duration%> </p>
-              <p class ="card-text"><%=exam.medium %></p>
+                <p class ="card-text"><b>Organised by:</b> <%=exam.organizer %></p>
+              <p class="card-text"><b>About the exam: </b><%= exam.description %><br><%=exam.duration%> </p>
+              <p class ="card-text"><b>Medium: </b><%=exam.medium %></p>
                 <div class="input-group col-lg-12 mb-4">
                     <div class="input-group-prepend">
                     </div>
@@ -60,10 +62,12 @@
                 </div>
             </div>
         </div>
+    
         <% }) %>
+    </div>
         <!-- Single card ends -->
 
-      </div> 
+      
 </div>
 </body>
 </html>

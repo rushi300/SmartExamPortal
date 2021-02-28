@@ -14,23 +14,24 @@ router.get("/login", (req, res) => {
 
 router.post('/login', 
     passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
+        console.log(req.user._id);
         if (req.user.isStudent) {
-            Student.findById(req.params.id, (err, student) => {
+            Student.findById(req.user._id, (err, student) => {
                 if (err) {
                     return res.redirect('/login');
                 }
                 else {
-                    res.redirect("/student-home/" + req.user.id);
+                    res.redirect("/student-home/" + req.user._id);
                 }
             });
         }
         if (req.user.isOrganisation) {
-            Organisation.findById(req.params.id, (err, organisation) => {
+            Organisation.findById(req.user._id, (err, organisation) => {
                 if (err) {
                     return res.redirect('/login');
                 }
                 else {
-                    res.redirect("/organisation-home/" + req.user.id);
+                    res.redirect("/organisation-home/" + req.user._id);
                 }
             });
         }

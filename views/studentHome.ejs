@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body style="background-color: #232f34;">
+<body style="background-color: #424242;">
+    <!-- <body style="background-color: linear-gradient(260deg, #3e5151 100%, #decba4 100%);"> -->
      <!-- Navbar begins -->
     <nav class="navbar">
         <span class="navbar-toggle" id="js-navbar-toggle">
@@ -43,30 +44,32 @@
             <div class="row">
                 <!-- single project -->
                 <% exams.forEach((exam) => { %>
-                <% if (exam.isPublic){ %>
+                    <% if (exam.isPublic){ %>
+
                 <div class="col-10 col-md-6 col-lg-4">
-                    <div class="project-container p-5
-                    outline">
-                        <div class="flip-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <img src="IMG_6355.jpg" alt="random" style="width:220px;height:170px;">
-                                </div>
-                                <div class="flip-card-back">
-                                    <p><%= exam.name %></p> 
-                                    <a href="/exam/<%= exam._id %>" class="btn " style="background-color: #53585a;color: #fff;" >Read More</a>
+                <ol style="text-align: center;" class="articles">
+                    <li class="articles__article" style="--animation-order:1"><a class="articles__link">
+                            <div style="text-align: center;" class="articles__content articles__content--lhs">
+                                <h2 class="articles__title"><%= exam.name %></h2>
+                                <p><%= exam.medium %></p>
+                                <!-- <p><%=exam.description%> </p> -->
+                                <a href="/exam/<%= exam._id %>" class="btn " style="background-color: #696969;color: #fff;">Read More</a>
+                                <div style="text-align: center;" class="articles__footer">
+                                   <time style="text-align: center;"><%= exam.date %>  </time>
                                 </div>
                             </div>
-                        </div> 
+                            <div style="text-align: center;"class="articles__content articles__content--rhs" aria-hidden="true">
+                                <h2 class="articles__title"><%= exam.name %></h2>
+                                <p><%= exam.medium %></p>
+                                <!-- <p><%=exam.description%> </p> -->
+                                <a href="/exam/<%= exam._id %>" class="btn " style="background-color: #696969;color: #fff;">Read More</a>
+                                <!-- <div style="text-align: center;"class="articles__footer"> -->
+                                   <time style="margin-top: 8px;"><%= exam.date %></time>
+                                <!-- </div> -->
+                            </div>
+                        </a></li>
                         
-                    </div>
-                    <h4 class="text-capitalize text-center my-2">
-                        <div style="margin-top: 30px;">
-                        </div>
-                    </h4>
-                    <h6 class="text-center">
-                        
-                    </h6>
+                    </ol> 
                 </div>
                 <!-- single project ends -->
                 <% } %>
@@ -76,31 +79,31 @@
                 <% student.organisations.forEach((organisation) => { %>
                     <% organisation.exams_conducted.forEach((exam) => { %>
                         <% if (!exam.isPublic){ %>
-                    <div class="col-10 col-md-6 col-lg-4">
-                        <div class="project-container p-5
-                        outline">
-                            <div class="flip-card">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-front">
-                                        <img src="IMG_6355.jpg" alt="random" style="width:220px;height:170px;">
-                                    </div>
-                                    <div class="flip-card-back">
-                                        <p><%= exam.name %></p> 
-    
-                                        <a href="/exam/<%= exam._id %>" class="btn " style="background-color: #53585a;color: #fff;" >Read More</a>
-                                    </div>
-                                </div>
-                            </div> 
-                            
-                        </div>
-                        <h4 class="text-capitalize text-center my-2">
-                            <div style="margin-top: 30px;">
+                            <div class="col-10 col-md-6 col-lg-4">
+                            <ol style="text-align: center;" class="articles">
+                                <li class="articles__article" style="--animation-order:1"><a class="articles__link">
+                                        <div style="text-align: center;" class="articles__content articles__content--lhs">
+                                            <h2 class="articles__title"><%= exam.name %></h2>
+                                            <p><%= exam.medium %></p>
+                                            <!-- <p><%=exam.description%> </p> -->
+                                            <a href="/exam/<%= exam._id %>" class="btn " style="background-color: #747c81;color: #fff;">Read More</a>
+                                            <div style="text-align: center;" class="articles__footer">
+                                               <time style="text-align: center;"><%= exam.date %>  </time>
+                                            </div>
+                                        </div>
+                                        <div style="text-align: center;"class="articles__content articles__content--rhs" aria-hidden="true">
+                                            <h2 class="articles__title"><%= exam.name %></h2>
+                                            <p><%= exam.medium %></p>
+                                            <!-- <p><%=exam.description%> </p> -->
+                                            <a href="/exam/<%= exam._id %>" class="btn " style="background-color: #747c81;color: #fff;">Read More</a>
+                                            <!-- <div style="text-align: center;"class="articles__footer"> -->
+                                               <time style="margin-top: 8px;"><%= exam.date %></time>
+                                            <!-- </div> -->
+                                        </div>
+                                    </a></li>
+                                    
+                                </ol> 
                             </div>
-                        </h4>
-                        <h6 class="text-center">
-                            
-                        </h6>
-                    </div>
                     <!-- single project ends -->
                     <% } %>
                     <% }) %>
@@ -118,6 +121,16 @@ let navBarToggle = document.getElementById('js-navbar-toggle');
 navBarToggle.addEventListener('click', function () {
   mainNav.classList.toggle('active');
 });
+
+var today = new Date();
+var dd = today. getDate();
+var mm = today. getMonth()+1; //January is 0 so need to add 1 to make it 1!
+var yyyy = today. getFullYear();
+if(dd<10){
+    dd = ("0" + date_ob.getDate()).slice(-2); 
+}
+todayDate = yyyy+"-"+mm+"-"+dd;
+
 </script>
       
 </body>

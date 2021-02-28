@@ -16,7 +16,7 @@ mongoose.connect("mongodb://localhost/newtest",
                     {useNewUrlParser: true, 
                     useUnifiedTopology: true, 
                     useCreateIndex: true
-    });
+                });
                     
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/public'));
@@ -37,32 +37,34 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
   },
   async function (username, password, done) {
-    await Student.findOneAndUpdate({ email: username }, { $set: { isStudent: true, isOrganisation: false } }, async (err, user) => {
+    await Student.findOne({ email: username }, async (err, user) => {
       if (err) {
         console.log(err);
       }
       if (user) {
+        user.isStudent = true;
+        user.isOrganisation = false;
+        user.save();
         passport.serializeUser(Student.serializeUser());
         passport.deserializeUser(Student.deserializeUser());
         return done(err, user);
       }
     });
 
-    Organisation.findOneAndUpdate({ email: username }, { $set: { isStudent: false, isOrganisation: true } }, (err, user) => {
+    await Organisation.findOne({ email: username }, (err, user) => {
       if (err) {
         console.log(err);
       }
       if (user) {
+        user.isStudent = false;
+        user.isOrganisation = true;
+        user.save();
         passport.serializeUser(Organisation.serializeUser());
         passport.deserializeUser(Organisation.deserializeUser());
         return done(err, user);
       }
     });
   }));
-
-
-
-
 
 app.use(indexRoutes);
 app.use(examRoutes);
