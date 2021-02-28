@@ -24,7 +24,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended:false}));
 app.use(require("express-session")({
-    secret: "Rusty is the best and cutest dog in the world",
+    secret: "This is in testing",
     resave: false,
     saveUninitialized: false
 }));
