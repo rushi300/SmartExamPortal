@@ -53,7 +53,7 @@
                 
                 <!-- add duration @parth -->
                 <p class ="card-text"><b>Organised by:</b> <%=exam.organizer %></p>
-              <p class="card-text"><b>About the exam: </b><%= exam.description %><br><%=exam.duration%> </p>
+              <p class="card-text"><b>About the exam: </b><%= exam.description.substring(0,50) %> <br><%=exam.duration%> </p>
               <p class ="card-text"><b>Medium: </b><%=exam.medium %></p>
                 <div class="input-group col-lg-12 mb-4">
                     <div class="input-group-prepend">
