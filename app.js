@@ -12,7 +12,7 @@ var Organisation = require('./models/organisation');
 var indexRoutes = require("./routes/index");
 var examRoutes = require("./routes/exam");
 
-mongoose.connect("mongodb://localhost/newtest", 
+mongoose.connect("mongodb://localhost/test1", 
                     {useNewUrlParser: true, 
                     useUnifiedTopology: true, 
                     useCreateIndex: true
