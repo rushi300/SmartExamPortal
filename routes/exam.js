@@ -62,15 +62,15 @@ router.post('/exam/new/:id', (req, res) => {
 
 
 router.get("/student-home/:id", (req, res) => {
+    console.log("in student-home/:id route:")
+    console.log(req.user._id);
     var foundExam;
     Exam.find({}, (err, foundExams) => {
         if (err)
             return res.redirect("back");
-        console.log(foundExams);
         foundExam = foundExams;
     });
-    console.log("req.params.id: ");
-    console.log(req.params.id);
+
     Student.findById(req.params.id).populate({
         path: "organisations",
         populate: {
@@ -79,7 +79,6 @@ router.get("/student-home/:id", (req, res) => {
     }).exec((err, foundStudent) => { 
         if (err)
             return res.redirect("back");
-        console.log(foundStudent);
         res.render("studentHome", { exams: foundExam, student: foundStudent });
     });
 });
@@ -127,7 +126,9 @@ router.post("/subscribe/:clicked_exam_id", (req, res) => {
     });
 });
 
-router.get("/exam/:id/:student_id",function(req,res){
+router.get("/exam/:id/:student_id", function (req, res) {
+    console.log(req.path);
+    console.log(req.query);
     Exam.findById(req.params.id,(err,foundExam)=>{
         if(err){
             console.log(err);

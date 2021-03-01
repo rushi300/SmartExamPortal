@@ -7,6 +7,8 @@ const Exam         = require("../models/exam");
 var middleware     =  require("../middleware")
 
 router.get("/organisation-home/:id", async (req, res) => {
+    console.log("in organisation-home/:id route:")
+    console.log(req.user._id);
     Organisation.findById(req.params.id).populate("exams_conducted").exec((err, foundOrganisation) => {
         if (err) {
             return res.redirect("back");

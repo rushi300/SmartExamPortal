@@ -7,6 +7,8 @@ const Exam = require("../models/exam");
 var middleware     =  require("../middleware")
 
 router.post("/join-organisation", (req, res) => {
+    console.log("in join-organisation post route:")
+    console.log(req.user._id);
     Student.findById(req.user._id, (err, foundStudent) => {
         if (err)
             return res.redirect("back");
@@ -25,7 +27,8 @@ router.post("/join-organisation", (req, res) => {
 });
 
 router.get("/show-registered-organisations", (req, res) => {
-    // console.log(req.user);
+    console.log("in show-registered-organisation route:")
+    console.log(req.user._id);
     Student.findById(req.user._id).populate("organisations").exec((err, foundStudent) => {
         if (err)
             return res.redirect("back");
@@ -37,6 +40,8 @@ router.get("/show-registered-organisations", (req, res) => {
 });
 
 router.get("/student-home/:id", (req, res) => {
+    console.log("in student-home/:id route:")
+    console.log(req.user._id);
     Exam.find({}, (err, foundExam) => {
         if (err)
             return res.redirect("back");
@@ -49,13 +54,14 @@ router.get("/student-home/:id", (req, res) => {
         }).exec((err, foundStudent) => {
             if (err)
                 return res.redirect("back");
-            // console.log(foundExam);
             res.render("studentHome", { exams: foundExam, student: foundStudent });
         });
     });
 });
 
-router.post("/subscribe/:clicked_exam_id",middleware.isLoggedIn_student, (req, res) => {
+router.post("/subscribe/:clicked_exam_id", middleware.isLoggedIn_student, (req, res) => {
+    console.log("in subscribe/clicked_exam_id route:")
+    console.log(req.user._id);
     Exam.findById(req.params.clicked_exam_id, async (err,foundExam)=>{
         if(err){
             console.log(err);
@@ -87,7 +93,9 @@ router.post("/subscribe/:clicked_exam_id",middleware.isLoggedIn_student, (req, r
     });
 });
 
-router.get("/:student_id/myExams",(req,res)=>{
+router.get("/:student_id/myExams", (req, res) => {
+    console.log("in student_id/myExams route :")
+    console.log(req.user._id);
     Student.findById(req.params.student_id).populate("exams").exec((err,foundStudent)=>{
         if(err){
             console.error(err);

@@ -5,8 +5,8 @@ const StudentSchema = new mongoose.Schema({
     firstName     : String,
     middleName    : String,
     lastName      : String,
-    email         : {type: String, unique: true , required: true},
-    pass          : String,
+    email: { type: String, unique: true, required: true },
+    passwordHash: String,
     dob           : String,
     gender        : String,
     organisations : [{
@@ -22,18 +22,6 @@ const StudentSchema = new mongoose.Schema({
     isOrganisation: Boolean
 });
 
-StudentSchema.methods.validPassword = function (password) {
-    console.log(password);
-    console.log(this.password);
-    if (password === this.password) {
-    return true; 
-  } else {
-    return false;
-  }
-};
-
-StudentSchema.plugin(passportLocalMongoose,{
-    usernameField : "email"
-});
+StudentSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("Student", StudentSchema);

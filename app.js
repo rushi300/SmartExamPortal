@@ -4,7 +4,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const LocalStrategy = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
-const moment = require('moment');
+const bcrypt = require('bcrypt');
 
 var Student = require('./models/student');
 var Organisation = require('./models/organisation');
@@ -33,44 +33,57 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password'
-  },
-  async function (username, password, done) {
-    await Student.findOne({ email: username }, async (err, user) => {
-      if (err) {
-        console.log(err);
+  usernameField: 'email',
+  passwordField: 'password'
+}, (email, password, done) => {
+    Student.findOne({ email: email },(err, user) => {
+      if (!err && user) {
+        bcrypt.compare(password, user.passwordHash).then(function (result) {
+          console.log(result);
+          if (!result) {
+            return done(null, false);
+          }
+          passport.serializeUser(function (user, done) {
+            done(null, user._id);
+          });
+          passport.deserializeUser(function (id, done) {
+            Student.findById(id, function (err, user) {
+              return done(err, user);
+            });
+          });
+          return done(null, user);
+        });
       }
-      if (user) {
-        user.isStudent = true;
-        user.isOrganisation = false;
-        user.save();
-        passport.serializeUser(Student.serializeUser());
-        passport.deserializeUser(Student.deserializeUser());
-        return done(err, user);
-      }
-    });
 
-    await Organisation.findOne({ email: username }, (err, user) => {
-      if (err) {
-        console.log(err);
-      }
-      if (user) {
-        user.isStudent = false;
-        user.isOrganisation = true;
-        user.save();
-        passport.serializeUser(Organisation.serializeUser());
-        passport.deserializeUser(Organisation.deserializeUser());
-        return done(err, user);
-      }
+      Organisation.findOne({ email: email }, (err,user) => {
+        if (!err && user) {
+          bcrypt.compare(password, user.passwordHash).then(function (result) {
+            console.log(result);
+            if (!result) {
+              return done(null, false);
+            }
+
+            passport.serializeUser(function (user, done) {
+              done(null, user._id);
+            });
+
+            passport.deserializeUser(function (id, done) {
+              Organisation.findById(id, function (err, user) {
+                return done(err, user);
+              });
+            });
+            return done(null, user);
+          });
+        }
+      });
     });
-  }));
+}));
 
 app.use(indexRoutes);
 app.use(examRoutes);
 
-app.get("/", (req,res) => {
-    res.redirect("/login")
+app.get("/", (req, res) => {
+  res.redirect("/login")
 })
 
 app.listen(process.env.PORT || 1000, process.env.IP, function(){
