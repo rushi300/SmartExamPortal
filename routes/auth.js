@@ -8,7 +8,6 @@ const randomString = require('randomstring');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
 
-// Login Routes
 router.get("/login", (req, res) => {
     res.render('login');
 });
@@ -28,16 +27,15 @@ router.get("/logout", (req, res) => {
     return res.redirect("/");
 });
 
-// Student Register
 
 router.get("/student_register", (req, res) => {
     res.render("studentRegister");
 });
 
+
 router.post("/student_register", (req, res) => {
     var saltRounds = 20;
     var passwordHash;
-
     bcrypt.hash(req.body.password, saltRounds).then(function (hash) {
         passwordHash = hash;
         var newStudent = new Student({
@@ -62,14 +60,12 @@ router.post("/student_register", (req, res) => {
     });
 });
 
-// Organisation Register
-
 router.get("/organisation_register", (req, res) => {
     res.render("organisationRegister");
 });
 
+
 router.post("/organisation_register", (req, res) => { 
-    console.log("hi");
     var saltRounds = 20;
     var passwordHash;
     var joiningCode = randomString.generate(6);
@@ -84,15 +80,12 @@ router.post("/organisation_register", (req, res) => {
             joiningCode: joiningCode,
             Name: req.body.Name,
             websiteLink: req.body.websiteLink
-        });
-        console.log(newOrganisation);    
+        });   
         Organisation.create(newOrganisation, async (err, organisationCreated) => {
             if (err) {
-                console.error(err);
                 res.send("errrorrrrrrrrrrrr!");
             }
             else {
-                console.log("organisationCreated:\n" + organisationCreated);
                 var transporter = nodemailer.createTransport({
                     service: "Gmail",
                     auth: {
@@ -113,35 +106,6 @@ router.post("/organisation_register", (req, res) => {
     });
 });
 
-router.post("/join-organisation", (req, res) => {
-    Student.findById(req.user._id, (err, foundStudent) => {
-        if (err)
-            return res.redirect("back");
-        // console.log(req.body.joiningCode);
-        Organisation.findOne({ joiningCode: req.body.joiningCode }, (err, foundOrganisation) => {
-            if (err)
-                return res.redirect("back");
-            // console.log(foundOrganisation);
-            foundStudent.organisations.push(foundOrganisation._id);
-            foundOrganisation.students.push(foundStudent._id);
-            foundStudent.save();
-            foundOrganisation.save();
-            return res.redirect('/student-home/' + req.user._id);
-        });
-    });
-});
 
-router.get("/show-registered-organisations", (req, res) => {
-    console.log("in show-registered-organisation route:")
-    console.log(req.user._id);
-    Student.findById(req.user._id).populate("organisations").exec((err, foundStudent) => {
-        if (err)
-            return res.redirect("back");
-        
-        var listOfRegisteredOrganisations = foundStudent.organisations;
-
-        res.render("joinOrganisation", {listOfRegisteredOrganisations: listOfRegisteredOrganisations, user: req.user});
-    });
-});
 
 module.exports = router

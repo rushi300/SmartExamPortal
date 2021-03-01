@@ -9,8 +9,10 @@ const bcrypt = require('bcrypt');
 var Student = require('./models/student');
 var Organisation = require('./models/organisation');
 
-var indexRoutes = require("./routes/index");
+var authRoutes = require("./routes/auth");
 var examRoutes = require("./routes/exam");
+var studentRoutes = require("./routes/student");
+var organisationRoutes = require("./routes/organisation");
 
 mongoose.connect("mongodb://localhost/test2", 
                     {useNewUrlParser: true, 
@@ -39,7 +41,6 @@ passport.use(new LocalStrategy({
     Student.findOne({ email: email },(err, user) => {
       if (!err && user) {
         bcrypt.compare(password, user.passwordHash).then(function (result) {
-          console.log(result);
           if (!result) {
             return done(null, false);
           }
@@ -54,39 +55,40 @@ passport.use(new LocalStrategy({
           return done(null, user);
         });
       }
+    });
 
-      Organisation.findOne({ email: email }, (err,user) => {
-        if (!err && user) {
-          bcrypt.compare(password, user.passwordHash).then(function (result) {
-            console.log(result);
-            if (!result) {
-              return done(null, false);
-            }
+    Organisation.findOne({ email: email }, (err,user) => {
+      if (!err && user) {
+        bcrypt.compare(password, user.passwordHash).then(function (result) {
+          if (!result) {
+            return done(null, false);
+          }
 
-            passport.serializeUser(function (user, done) {
-              done(null, user._id);
-            });
-
-            passport.deserializeUser(function (id, done) {
-              Organisation.findById(id, function (err, user) {
-                return done(err, user);
-              });
-            });
-            return done(null, user);
+          passport.serializeUser(function (user, done) {
+            done(null, user._id);
           });
-        }
-      });
+
+          passport.deserializeUser(function (id, done) {
+            Organisation.findById(id, function (err, user) {
+              return done(err, user);
+            });
+          });
+          return done(null, user);
+        });
+      }
     });
 }));
 
-app.use(indexRoutes);
+app.use(authRoutes);
 app.use(examRoutes);
+app.use(studentRoutes);
+app.use(organisationRoutes);
 
 app.get("/", (req, res) => {
   res.redirect("/login")
-})
+});
 
-app.listen(process.env.PORT || 1000, process.env.IP, function(){
-    console.log("The Server is listening on " + 1000);
+app.listen(process.env.PORT || 3000, process.env.IP, function(){
+    console.log("The Server is listening on " + 3000);
 });
 
