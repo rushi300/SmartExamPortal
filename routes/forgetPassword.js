@@ -1,3 +1,4 @@
+require("dotenv/config");
 const express = require('express');
 const Student = require('../models/student');
 const Organisation = require('../models/organisation');
