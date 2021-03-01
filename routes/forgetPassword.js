@@ -18,7 +18,7 @@ router.post("/forget-password", async (req, res) => {
         service: "Gmail",
         auth: {
             user: "parthshah1936@gmail.com",
-            pass: "adgzcbqet19",
+            pass: process.env.password,
         },
     });
 
