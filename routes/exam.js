@@ -56,8 +56,6 @@ router.post('/exam/new/:id', (req, res) => {
 
 });
 
-
-
 router.get("/exam/:id/:student_id", function (req, res) {
     Exam.findById(req.params.id,(err,foundExam)=>{
         if(err){
@@ -67,7 +65,5 @@ router.get("/exam/:id/:student_id", function (req, res) {
         }
     })
 });
-
-
 
 module.exports = router;

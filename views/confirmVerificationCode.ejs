@@ -9,6 +9,7 @@
 <body>
     <form action="/confirmVerificationCode" method="POST">
         <input type="hidden" name="correctCode" value="<%= verificationCode %>">
+        <input type="hidden" name="email" value="<%= email %>">
         <input type="text" name="verificationCode" placeholder="Enter your verification Code">
         <button type="submit">Check</button>
     </form>

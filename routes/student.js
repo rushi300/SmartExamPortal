@@ -1,13 +1,10 @@
 const express      = require("express");
 const router       = express.Router();
-const passport     = require("passport");
 const Student      = require("../models/student");
 const Organisation = require("../models/organisation");
 const Exam = require("../models/exam");
 const nodemailer = require('nodemailer');
 var middleware = require("../middleware");
-
-
 
 router.get("/student-home/:id", (req, res) => {
     var foundExam;

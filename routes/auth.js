@@ -27,14 +27,12 @@ router.get("/logout", (req, res) => {
     return res.redirect("/");
 });
 
-
 router.get("/student_register", (req, res) => {
     res.render("studentRegister");
 });
 
-
 router.post("/student_register", (req, res) => {
-    var saltRounds = 20;
+    var saltRounds = 8;
     var passwordHash;
     bcrypt.hash(req.body.password, saltRounds).then(function (hash) {
         passwordHash = hash;
@@ -64,9 +62,8 @@ router.get("/organisation_register", (req, res) => {
     res.render("organisationRegister");
 });
 
-
 router.post("/organisation_register", (req, res) => { 
-    var saltRounds = 20;
+    var saltRounds = 8;
     var passwordHash;
     var joiningCode = randomString.generate(6);
 
@@ -105,7 +102,5 @@ router.post("/organisation_register", (req, res) => {
         });
     });
 });
-
-
 
 module.exports = router

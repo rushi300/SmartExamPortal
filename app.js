@@ -13,8 +13,9 @@ var authRoutes = require("./routes/auth");
 var examRoutes = require("./routes/exam");
 var studentRoutes = require("./routes/student");
 var organisationRoutes = require("./routes/organisation");
+var forgetPasswordRoutes = require("./routes/forgetPassword");
 
-mongoose.connect("mongodb://localhost/test2", 
+mongoose.connect("mongodb://localhost/test3", 
                     {useNewUrlParser: true, 
                     useUnifiedTopology: true, 
                     useCreateIndex: true
@@ -83,6 +84,7 @@ app.use(authRoutes);
 app.use(examRoutes);
 app.use(studentRoutes);
 app.use(organisationRoutes);
+app.use(forgetPasswordRoutes);
 
 app.get("/", (req, res) => {
   res.redirect("/login")
