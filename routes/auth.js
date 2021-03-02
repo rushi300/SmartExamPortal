@@ -5,7 +5,7 @@ const passport     = require("passport");
 const Student         = require("../models/student");
 const Organisation = require("../models/organisation");
 const randomString = require('randomstring');
-const nodemailer = require('nodemailer');
+const email = require('./email');
 const bcrypt = require('bcrypt');
 
 router.get("/login", (req, res) => {
@@ -80,23 +80,14 @@ router.post("/organisation_register", (req, res) => {
         });   
         Organisation.create(newOrganisation, async (err, organisationCreated) => {
             if (err) {
+                console.log(err);
                 res.send("errrorrrrrrrrrrrr!");
             }
             else {
-                var transporter = nodemailer.createTransport({
-                    service: "Gmail",
-                    auth: {
-                        user: "parthshah1936@gmail.com",
-                        pass: process.env.password,
-                    },
-                });
-                await transporter.sendMail({
-                    from: "parthshah1936@gmail.com",
-                    to: organisationCreated.email,
-                    subject: "Your Unique joining code",
-                    text:  "Your Unique joining code is " + joiningCode + "\nShare this code with the students to join your organisation."
-                });
-                transporter.close();
+                var textToBeSentInEmail = "Your Unique Joining Code is " + joiningCode + "\nShare this code with the students to join your organisation";
+                var subjectOfEmail = "Unique Joining Code";
+                email.sendEmail(organisationCreated.email, subjectOfEmail, textToBeSentInEmail);
+
                 res.redirect("/login");
             }
         });

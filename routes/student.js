@@ -3,8 +3,7 @@ const router       = express.Router();
 const Student      = require("../models/student");
 const Organisation = require("../models/organisation");
 const Exam = require("../models/exam");
-const nodemailer = require('nodemailer');
-var middleware = require("../middleware");
+const email = require('./email');
 
 router.get("/student-home/:id", (req, res) => {
     var foundExam;
@@ -43,21 +42,10 @@ router.post("/subscribe/:clicked_exam_id", (req, res) => {
             console.log(err);
             res.redirect("back");
         } else {
-            var transporter = nodemailer.createTransport({
-                service: "Gmail",
-                auth: {
-                    user: "parthshah1936@gmail.com",
-                    pass: process.env.password,
-                },
-            });
-            await transporter.sendMail({
-                from: "smartexamportal@gmail.com",
-                to: req.user.email,
-                subject: "Subscribed to exam",
-                text:  "You have successfully subscribed to exam!"
-            });
-            transporter.close();
-
+            var subjectOfEmail = "Subscribed to exam";
+            var textToBeSentInEmail = "You have successfully subscribed to exam";
+            email.sendEmail(req.user.email, subjectOfEmail, textToBeSentInEmail);
+   
             req.user.exams.push(foundExam);
             foundExam.students_registered.push(req.user._id);
             req.user.save();

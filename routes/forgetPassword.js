@@ -4,7 +4,7 @@ const Student = require('../models/student');
 const Organisation = require('../models/organisation');
 const router = express.Router();
 const randomString = require('randomstring');
-const nodemailer = require('nodemailer');
+const email = require('./email');
 const bcrypt = require('bcrypt');
 
 router.get("/forget-password", (req, res) => {
@@ -12,26 +12,14 @@ router.get("/forget-password", (req, res) => {
 });
 
 router.post("/forget-password", async (req, res) => {
-    var email = req.body.email;
+
     var verificationCode = randomString.generate(5);
 
-    var transporter = nodemailer.createTransport({
-        service: "Gmail",
-        auth: {
-            user: "parthshah1936@gmail.com",
-            pass: process.env.password,
-        },
-    });
+    var textToBeSentInEmail = "Your verification code is " + verificationCode;
+    var subjectOfEmail = "Password Reset Code";
+    email.sendEmail(req.body.email, subjectOfEmail, textToBeSentInEmail);
 
-    await transporter.sendMail({
-        from: "parthshah1936@gmail.com",
-        to: email,
-        subject: "Password Reset Code",
-        text: "Your verification code is " + verificationCode
-    });
-    transporter.close();
-
-    res.render("confirmVerificationCode", { verificationCode: verificationCode,email: email });
+    res.render("confirmVerificationCode", { verificationCode: verificationCode,email: req.body.email });
 
 });
 
