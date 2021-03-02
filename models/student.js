@@ -22,6 +22,8 @@ const StudentSchema = new mongoose.Schema({
     isOrganisation: Boolean
 });
 
-StudentSchema.plugin(passportLocalMongoose);
+StudentSchema.plugin(passportLocalMongoose,{
+    usernameField : "email"
+});
 
 module.exports = mongoose.model("Student", StudentSchema);

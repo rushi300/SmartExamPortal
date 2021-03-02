@@ -15,7 +15,7 @@ var studentRoutes = require("./routes/student");
 var organisationRoutes = require("./routes/organisation");
 var forgetPasswordRoutes = require("./routes/forgetPassword");
 
-mongoose.connect("mongodb://localhost/test3", 
+mongoose.connect("mongodb://localhost/test4", 
                     {useNewUrlParser: true, 
                     useUnifiedTopology: true, 
                     useCreateIndex: true
