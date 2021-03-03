@@ -5,13 +5,13 @@ function sendEmail(email,subjectOfEmail, textToBeSentInEmail) {
     var transporter = nodemailer.createTransport({
         service: "Gmail",
         auth: {
-            user: "parthshah1936@gmail.com",
+            user: process.env.email,
             pass: process.env.password,
         },
     });
 
     transporter.sendMail({
-        from: "parthshah1936@gmail.com",
+        from: process.env.email,
         to: email,
         subject: subjectOfEmail,
         text: textToBeSentInEmail
