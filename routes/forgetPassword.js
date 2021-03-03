@@ -6,7 +6,6 @@ const router = express.Router();
 const randomString = require('randomstring');
 const email = require('./email');
 const bcrypt = require('bcrypt');
-const e = require("express");
 
 router.get("/forget-password", (req, res) => {
     res.render("forgetPassword"); 
