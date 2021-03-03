@@ -48,6 +48,7 @@
                     <th>End Time</th>
                     <th>Total duration</th>
                     <th>Registered</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -61,6 +62,15 @@
                     <td><%=  element.endTime %></td>
                     <td><%= element.duration %></td>
                     <td><%= element.students_registered.length %></td>
+                    <% if (element.isCompleted) {%>
+                    <td>Completed</td>
+                    <% } %>
+                    <% if (element.isLive) {%>
+                    <td>Live</td>
+                    <% } %>
+                    <% if (element.isUpcoming) {%>
+                    <td>Upcoming</td>
+                    <% } %>
                     </tr>
                 <% i++ %>
                 <% }) %>         

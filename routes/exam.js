@@ -13,34 +13,39 @@ router.get('/exam/new/:id', (req,res)=>{
 });
 
 router.post('/exam/new/:id', (req, res) => {
-    var mydate1 = req.body.date.split("-").reverse().join("-");
-    console.log("mydate1: "+ mydate1)
+    var mydate1 = req.body.date1.split("-").reverse().join("-");
     var reversedSting1 = moment(mydate1, "DD MM, YYYY").toLocaleString();
     reversedSting1 = reversedSting1.slice(4,16);
-    console.log(reversedSting1);
     var startTime = new Date(reversedSting1 + " " + req.body.startTime);
     
-    var mydate2 = req.body.date.split("-").reverse().join("-");
-    console.log("mydate2: "+ mydate2)
+    var mydate2 = req.body.date2.split("-").reverse().join("-");
     var reversedSting2 = moment(mydate2, "DD MM, YYYY").toLocaleString();
     reversedSting2 = reversedSting2.slice(4,16);
-    console.log(reversedSting2);
     var endTime = new Date(reversedSting2 + " " + req.body.endTime);
+    
     var diff = endTime - startTime;
     var min = diff / 60000;
     var hours = parseInt(min / 60);
     var mins = min % 60;
-    console.log("endtime: " + endTime);
-    console.log("startTime: " + startTime);
-    console.log(hours + " hours and " + mins + " minutes");
-    var date = new Date();
-    if (date > endTime)
-        console.log("past exam");
-    if (date >= startTime && date <= endTime)
-        console.log("live exam");
-    if (date < startTime)
-        console.log("upcoming exam");
 
+    var duration;
+    if (hours == 0) {
+        if (mins == 1)
+            duration = "1 min";
+        else
+            duration = mins + " mins";
+    }
+    else if (hours == 1) {
+        if (mins == 0)
+            duration = "1 hr";
+        else if (mins == 1)
+            duration = "1 hr 1 min";
+        else
+            duration = "1 hr " + mins + " mins";
+    }
+    else
+        duration = hours + " hrs " + mins + " mins";
+    
     var isPublic = false;
     if (req.body.isPrivate == "on")
         isPublic = false;
@@ -53,7 +58,7 @@ router.post('/exam/new/:id', (req, res) => {
         medium: req.body.medium,
         startTime: startTime,
         endTime: endTime,
-        duration: hours + " hours " + mins + " minutes",
+        duration: duration,
         isPublic: isPublic,
         organizer: req.body.Name
     });

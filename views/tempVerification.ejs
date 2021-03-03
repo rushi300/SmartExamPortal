@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/7414e22221.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/stylesheets/login.css">
+  <title>Verification</title>
+</head>
+<body>
+  <section id="hero">
+    <div class="container hero-wrap">
+      <div class="login-wrap">
+        <div style="margin-top:100px;margin-left: 365px;" class="login-wrap-box">
+          <div class="login-title">
+            <h3>Verification Code</h3>
+            <p>Enter the code sent to your mail </p>
+          </div>
+
+          <form action="/confirmVerificationCode" method="POST">
+            <p >
+              <label for="email">Enter the 5-digit code</label>
+              <input type="text" name="verificationCode" placeholder="Verification Code">
+              <input type="hidden" name="email" value="<%= email %>">
+              <input type="hidden" name="correctCode" value="<%= verificationCode %>">
+            </p>
+            <p>
+            <p>
+              <button class="btn-submit" type="submit">Continue to reset</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+</body>
+</html>

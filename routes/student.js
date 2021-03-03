@@ -31,6 +31,22 @@ router.get("/:student_id/myExams",(req,res)=>{
             console.error(err);
             res.redirect("back");
         }else{
+            exams = foundStudent.exams
+            exams.forEach((exam)=>{
+                if (date > exam.endTime){
+                    exam.isCompleted = true;
+                    exam.isLive = false;
+                    exam.isUpcoming = false
+                }
+                if (date >= exam.startTime && date <= exam.endTime){
+                    // console.log("live exam");
+                    exam.isLive = true;
+                    exam.isUpcoming = false
+                }
+                if (date < exam.startTime)
+                    // console.log("upcoming exam");
+                    exam.isUpcoming = True;
+            })
             res.render("myExams", { exams: foundStudent.exams, user: req.user });
         }
     })

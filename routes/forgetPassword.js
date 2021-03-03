@@ -8,7 +8,7 @@ const email = require('./email');
 const bcrypt = require('bcrypt');
 
 router.get("/forget-password", (req, res) => {
-    res.render("forgetPassword"); 
+    res.render("tempForgotPassword"); 
 });
 
 router.post("/forget-password", async (req, res) => {
@@ -19,7 +19,7 @@ router.post("/forget-password", async (req, res) => {
         var subjectOfEmail = "Password Reset Code";
         email.sendEmail(req.body.email, subjectOfEmail, textToBeSentInEmail);
     
-        return res.render("confirmVerificationCode", { verificationCode: verificationCode,email: req.body.email });
+        return res.render("tempVerification", { verificationCode: verificationCode,email: req.body.email });
     } 
     return res.redirect("back");
 });
@@ -28,7 +28,7 @@ router.post("/confirmVerificationCode", (req, res) => {
     if (req.body.correctCode != req.body.verificationCode)
         return res.redirect("back");
     
-    return res.render("resetPassword", {email: req.body.email});
+    return res.render("tempResetPassword", {email: req.body.email});
 });
 
 router.post("/reset-password", (req, res) => {
