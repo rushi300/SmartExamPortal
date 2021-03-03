@@ -195,13 +195,13 @@ h6 {
     linear,
     left bottom,
     left top,
-    from(#53585a),
-    to(#4a6572)
+    from(#273444),
+    to(#273444)
   );
-  background: -webkit-linear-gradient(bottom, #53585a 0%, #4a6572 100%);
-  background: -moz-linear-gradient(bottom, #53585a 0%, #4a6572 100%);
-  background: -o-linear-gradient(bottom, #53585a 0%, #4a6572 100%);
-  background: linear-gradient(to top, #53585a 0%, #4a6572 100%);
+  background: -webkit-linear-gradient(bottom, #273444 0%, #273444 100%);
+  background: -moz-linear-gradient(bottom, #273444 0%, #273444 100%);
+  background: -o-linear-gradient(bottom, #273444 0%, #273444 100%);
+  background: linear-gradient(to top, #273444 0%, #273444 100%);
 }
 
 .bg-gra-02 {
@@ -209,13 +209,13 @@ h6 {
     linear,
     left bottom,
     right top,
-    from(#53585a),
-    to(#4a6572)
+    from(#273444),
+    to(#273444)
   );
-  background: -webkit-linear-gradient(bottom left, #53585a 0%, #4a6572 100%);
-  background: -moz-linear-gradient(bottom left, #53585a 0%, #4a6572 100%);
-  background: -o-linear-gradient(bottom left, #53585a 0%, #4a6572 100%);
-  background: linear-gradient(to top right, #53585a 0%, #4a6572 100%);
+  background: -webkit-linear-gradient(bottom left, #273444 0%, #273444 100%);
+  background: -moz-linear-gradient(bottom left, #273444 0%, #273444 100%);
+  background: -o-linear-gradient(bottom left, #273444 0%, #273444 100%);
+  background: linear-gradient(to top right, #273444 0%, #273444 100%);
 }
 
 /* ==========================================================================
@@ -396,7 +396,7 @@ input {
 
 .input--style-4 {
   line-height: 50px;
-  background: #fafafa;
+  background: #273444;
   -webkit-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
   -moz-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
   box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
@@ -405,7 +405,7 @@ input {
   border-radius: 5px;
   padding: 0 20px;
   font-size: 16px;
-  color: #666;
+  color: rgba(255, 255, 255, 0.6);
   -webkit-transition: all 0.4s ease;
   -o-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
@@ -414,35 +414,37 @@ input {
 
 .input--style-4::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */
-  color: #666;
+  color: #918f8f;
 }
 
 .input--style-4:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
-  color: #666;
+  color: #918f8f;
   opacity: 1;
 }
 
 .input--style-4::-moz-placeholder {
   /* Mozilla Firefox 19+ */
-  color: #666;
+  color: #918f8f;
   opacity: 1;
 }
 
 .input--style-4:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: #666;
+  color: #918f8f;
 }
 
 .input--style-4:-ms-input-placeholder {
   /* Microsoft Edge */
-  color: #666;
+  color: #918f8f;
 }
 
 .label {
   font-size: 16px;
-  color: #555;
-  text-transform: capitalize;
+  font-weight: 100;
+  color: rgba(255, 255, 255, 0.64);
+
+  transform: capitalize;
   display: block;
   margin-bottom: 5px;
 }
@@ -453,7 +455,7 @@ input {
   padding-left: 30px;
   cursor: pointer;
   font-size: 16px;
-  color: #666;
+  color: rgba(255, 255, 255, 0.64);
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -467,7 +469,7 @@ input {
 }
 
 .radio-container input:checked ~ .checkmark {
-  background-color: #e5e5e5;
+  background-color: #696868;
 }
 
 .radio-container input:checked ~ .checkmark:after {
@@ -487,7 +489,7 @@ input {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  background: #57b846;
+  background: #a7ebbb;
 }
 
 .checkmark {
@@ -501,7 +503,7 @@ input {
   left: 0;
   height: 20px;
   width: 20px;
-  background-color: #e5e5e5;
+  background-color: #696868;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
@@ -672,7 +674,7 @@ input {
 }
 
 .card-4 {
-  background: #fff;
+  background: #1e2e3d;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;

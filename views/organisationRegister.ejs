@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Student Register</title>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/registerOrg.css"  media="all">
-    
+    <title>Register organisation</title>
+    <link href="stylesheets/registerOrg.css" rel="stylesheet" media="all">
 </head>
 
 <body>
     <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <h1 style="text-align: center;margin-bottom: 25px;margin-top: -80px;color: rgba(255, 255, 255, 0.87);">Register
+            as an Organisation</h1>
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-    
-                    <form method="post" action="/organisation_register">
-                        <div>
-
-                            <div class="col-1.5">
-                                <div class="input-group">
-                                    <label class="label">Name of the Organization</label>
-                                    <input class="input--style-4" type="text" name="Name">
-                                </div>
+                    <form action="/organisation_register" method="POST">
+                        <div class="col-1">
+                            <div class="input-group">
+                                <label class="label">Name of organisation</label>
+                                <input class="input--style-4" type="text" name="Name">
                             </div>
-
-                        </div >  
-                        <div class="row row-space">
-                            
                         </div>
                         <div class="col-1">
                             <div class="input-group">
-                                <label class="label">Website Link</label>
+                                <label class="label">Website of organisation</label>
                                 <input class="input--style-4" type="text" name="websiteLink">
                             </div>
+                        </div>
+                        <div class="row row-space">
                         </div>
                         <div class="col-1.5">
                             <div class="input-group">
@@ -42,36 +38,34 @@
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
-                                 <div class="input-group">
+                                <div class="input-group">
                                     <label class="label">Password</label>
                                     <input class="input--style-4" type="password" name="password">
                                 </div>
                             </div>
-                            
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Confirm Password</label>
-                                    <input class="input--style-4" type="password" name="retypedPassword">
+                                    <input class="input--style-4" type="password" name="cPassword">
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                         <div class="" style="text-align: center;margin-top: 20px;">
-                            <button class="btn btn--radius-2 btn--blue"  href="/login" type="submit">Register as Organization</button>
+                            <button class="btn btn--radius-2 " style="background-color: #5d8168d9;"
+                                type="submit">Register as Organisation</button>
                         </div>
                         <br>
                         <div class="text-center w-100" style="text-align: center;">
-                            <label class="label">Already Registered? <a href="/login"
-                                    class="text-primary ml-2">Login</a></p>
+                            <label class="label">Already Registered? <a href="/login" style="color: #5d8168d9;"
+                                    class=" ml-2">Login</a></p>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>   
+        </div>
     </div>
-
 
 </body>
 
 </html>
-      

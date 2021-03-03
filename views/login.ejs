@@ -1,44 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://kit.fontawesome.com/7414e22221.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="stylesheets/login.css">
+	<title>Login</title>
 </head>
+
 <body>
-	<div class="wrapper">
-		<div class="container" style="margin-top: 50px;">
-			<h1 class="font-weight-bold" style="color: #e79f39;">Welcome To Exam Portal</h1>
-			
-			<form class="form" action="/login" method="POST">
-				<input type="email" name="email" placeholder="Email">
-				<input type="password" name="password" placeholder="Password">
-				<button type="submit" id="login-button">Login</button>
-			</form>
-			<div style="font-size: 20px;">
-				<div class="form-group col-lg-12  d-flex align-items-center my-4">
-					<div class="border-bottom w-50 ml-100"></div>
-					<span class="px-2 small font-weight-bold "style="color: #ffffff;">OR</span>
-					<div class="border-bottom w-50 mr-100"></div>
-				</div>
-				<div class="text-center w-100">
-					<a href="/forget-password" class=" ml-2" style="color: #e79f39;"> Forgot Password ?
-					<p class="font-weight-medium" style="color: #fff;">Don't have an account?<br>
-						<a href="/student_register"class=" ml-2" style="color: #e79f39;"> Register as Student
-						<br>
-						<a href="/organisation_register"class=" ml-2" style="color: #e79f39;">Register as Organization
-					</p>
+	<section id="hero">
+		<div class="container hero-wrap">
+			<div class="quote-wrap">
+				<h1 style="font-size: 32px;">Welcome to Exam Portal</h1><br>
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident tempora blanditiis explicabo
+					ducimus, expedita rerum reprehenderit, facere beatae est qui impedit perfere ndisexplicabo ducimus,
+					expedita rerum reprehenderit.</p>
+			</div>
+			<div class="login-wrap">
+				<div class="login-wrap-box">
+					<div class="login-title">
+						<h3>Login</h3>
+						<p>Sign in to your account to continue</p>
+					</div>
+
+					<form action="/login" method="POST">
+						<p>
+							<input type="datetime-local" name="datetime" id=" ">
+							<label for="email">Email address</label>
+							<input type="email" name="email" placeholder="name@example.com">
+						</p>
+						<p>
+						<div class="d-flex">
+							<label for="password">Password</label>
+							<a href="/forget-password">Forgot password?</a>
+						</div>
+						<input id="password-field" name="password" type="password" class="form-control"
+							placeholder="Password">
+						<span toggle="#password-field" style="float: right;
+              margin-left: -75px;
+              padding-right: 30px;
+              margin-top: 12px;
+              position: relative;
+              z-index: 1;" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+						</p>
+						<p>
+							<button class="btn-submit" type="submit">Sign in</button>
+						</p>
+					</form>
+
+					<p style="text-align: center;" class="not-regis">Not registered?</p>
+					<span>
+						<p style="text-align: center;" class="not-regis"><a href="/student_register">Register as a
+								Student</a> or <a href="/organisation_register">Register as an organisation</a></p>
+					</span>
 				</div>
 			</div>
 		</div>
-	</div>
+
+	</section>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".toggle-password").click(function () {
+
+				$(this).toggleClass("fa-eye fa-eye-slash");
+				var input = $($(this).attr("toggle"));
+				if (input.attr("type") == "password") {
+					input.attr("type", "text");
+				} else {
+					input.attr("type", "password");
+				}
+			});
+		});
+	</script>
 </body>
 </html>

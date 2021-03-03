@@ -32,6 +32,8 @@ router.get("/student_register", (req, res) => {
 });
 
 router.post("/student_register", (req, res) => {
+    if (req.body.password != req.body.cpassword)
+        return res.redirect("back");
     var saltRounds = 8;
     var passwordHash;
     bcrypt.hash(req.body.password, saltRounds).then(function (hash) {
@@ -63,10 +65,13 @@ router.get("/organisation_register", (req, res) => {
 });
 
 router.post("/organisation_register", (req, res) => { 
+    if(req.body.password != req.body.cPassword){
+        return res.redirect("back");
+    }
     var saltRounds = 8;
     var passwordHash;
     var joiningCode = randomString.generate(6);
-
+    
     bcrypt.hash(req.body.password, saltRounds).then(function (hash) {
         passwordHash = hash;
         var newOrganisation = new Organisation({

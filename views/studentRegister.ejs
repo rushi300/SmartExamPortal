@@ -1,32 +1,31 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title> Student Register</title>
-
-    <link rel="stylesheet" type="text/css" href="/stylesheets/registerStudent.css"  media="all">
+    <title>Register as a Student</title>
+    <link href="stylesheets/registerStudent.css" rel="stylesheet" media="all">
 </head>
 
 <body>
     <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <h1 style="text-align: center;margin-bottom: 25px;margin-top: -80px;color: rgba(255, 255, 255, 0.87);">Register
+            as a Student</h1>
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <form action = "/student_register" method="POST">
+                    <form action="/student_register" method="POST">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">first name</label>
+                                    <label class="label">First name</label>
                                     <input class="input--style-4" type="text" name="firstName">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">last name</label>
+                                    <label class="label">Last name</label>
                                     <input class="input--style-4" type="text" name="lastName">
                                 </div>
                             </div>
@@ -37,6 +36,11 @@
                                     <label class="label">Date of Birth</label>
                                     <div class="input-group-icon">
                                         <input class="input--style-4 js-datepicker" type="date" name="dob">
+                                        <style>
+                                            ::-webkit-calendar-picker-indicator {
+                                                filter: invert(0.8);
+                                            }
+                                        </style>
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                 </div>
@@ -53,7 +57,7 @@
                                             <input type="radio" name="gender">
                                             <span class="checkmark"></span>
                                         </label>
-                                        <label style="margin-top: 12px;"class="radio-container">Others
+                                        <label style="margin-top: 12px;" class="radio-container">Others
                                             <input type="radio" name="gender">
                                             <span class="checkmark"></span>
                                         </label>
@@ -68,7 +72,6 @@
                             </div>
                         </div>
                         <div class="row row-space">
-
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Password</label>
@@ -81,25 +84,21 @@
                                     <input class="input--style-4" type="password" name="cpassword">
                                 </div>
                             </div>
-                            
-                        </div>
 
-                        <div class="" style="text-align: center;margin-top: 20px;">
-                            <button style="background-color: #e79f39;" class="btn btn--radius-2 btn--blue" href="/login" type="submit">Register as Student</button>
+                        </div>
+                        <div style="text-align: center;margin-top: 20px;">
+                            <button class="btn btn--radius-2 " style="background-color: #5d8168d9;"
+                                type="submit">Register as Student</button>
                         </div>
                         <br>
                         <div class="text-center w-100" style="text-align: center;">
-                            <label class="label">Already Registered? <a href="/login"
-                                    class="text-primary ml-2">Login</a></p>
+                            <label class="label">Already Registered? <a href="/login" style="color: #5d8168d9;"
+                                    class=" ml-2">Login</a></p>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-   
-
 </body>
-
 </html>
