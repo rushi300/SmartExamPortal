@@ -1,5 +1,25 @@
 require("dotenv/config");
 const nodemailer = require('nodemailer');
+const Student = require("../models/student");
+const Organisation = require("../models/organisation");
+
+async function studentEmailExists (enteredEmail) {
+    var emailExists = true;
+    await Student.findOne({ email: enteredEmail }, (err, foundStudent) => {
+        if (foundStudent == null) 
+            emailExists = false;
+    });
+    return emailExists;
+}
+
+async function organisationEmailExists(enteredEmail) {
+    var emailExists = true;
+    await Organisation.findOne({ email: enteredEmail }, (err, foundOrganisation) => {
+        if (foundOrganisation == null)
+            emailExists = false;
+    });
+    return emailExists;
+}
 
 function sendEmail(email,subjectOfEmail, textToBeSentInEmail) {
     var transporter = nodemailer.createTransport({
@@ -20,8 +40,9 @@ function sendEmail(email,subjectOfEmail, textToBeSentInEmail) {
     transporter.close();
 }
 
+
 module.exports = {
-    sendEmail: (email,subjectOfEmail, textToBeSentInEmail) => {
-        return sendEmail(email,subjectOfEmail, textToBeSentInEmail);
-    }
+    sendEmail: sendEmail,
+    studentEmailExists: studentEmailExists,
+    organisationEmailExists: organisationEmailExists
 }

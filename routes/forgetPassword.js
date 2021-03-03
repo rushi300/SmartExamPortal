@@ -6,21 +6,23 @@ const router = express.Router();
 const randomString = require('randomstring');
 const email = require('./email');
 const bcrypt = require('bcrypt');
+const e = require("express");
 
 router.get("/forget-password", (req, res) => {
     res.render("forgetPassword"); 
 });
 
 router.post("/forget-password", async (req, res) => {
-
-    var verificationCode = randomString.generate(5);
-
-    var textToBeSentInEmail = "Your verification code is " + verificationCode;
-    var subjectOfEmail = "Password Reset Code";
-    email.sendEmail(req.body.email, subjectOfEmail, textToBeSentInEmail);
-
-    res.render("confirmVerificationCode", { verificationCode: verificationCode,email: req.body.email });
-
+    if (await email.studentEmailExists(req.body.email) || await email.organisationEmailExists(req.body.email)) {
+        var verificationCode = randomString.generate(5);
+    
+        var textToBeSentInEmail = "Your verification code is " + verificationCode;
+        var subjectOfEmail = "Password Reset Code";
+        email.sendEmail(req.body.email, subjectOfEmail, textToBeSentInEmail);
+    
+        return res.render("confirmVerificationCode", { verificationCode: verificationCode,email: req.body.email });
+    } 
+    return res.redirect("back");
 });
 
 router.post("/confirmVerificationCode", (req, res) => {
