@@ -3,16 +3,10 @@ const router       = express.Router();
 const Student      = require("../models/student");
 const Organisation = require("../models/organisation");
 const Exam = require("../models/exam");
-const email = require('./email');
+const email = require('../helpers/email');
+const exam = require("../helpers/exam");
 
 router.get("/student-home/:id", (req, res) => {
-    var foundExam;
-    Exam.find({}, (err, foundExams) => {
-        if (err)
-            return res.redirect("back");
-        foundExam = foundExams;
-    });
-
     Student.findById(req.params.id).populate({
         path: "organisations",
         populate: {
@@ -21,7 +15,12 @@ router.get("/student-home/:id", (req, res) => {
     }).exec((err, foundStudent) => { 
         if (err)
             return res.redirect("back");
-        res.render("studentHome", { exams: foundExam, student: foundStudent });
+        Exam.find({}, (err, foundExams) => {
+            if (err)
+                return res.redirect("back");
+            var allExams = exam.updateExamStatus(foundExams); 
+            return res.render("studentHome", { exams: allExams, student: foundStudent });
+        });
     });
 });
 
@@ -31,23 +30,9 @@ router.get("/:student_id/myExams",(req,res)=>{
             console.error(err);
             res.redirect("back");
         }else{
-            exams = foundStudent.exams
-            exams.forEach((exam)=>{
-                if (date > exam.endTime){
-                    exam.isCompleted = true;
-                    exam.isLive = false;
-                    exam.isUpcoming = false
-                }
-                if (date >= exam.startTime && date <= exam.endTime){
-                    // console.log("live exam");
-                    exam.isLive = true;
-                    exam.isUpcoming = false
-                }
-                if (date < exam.startTime)
-                    // console.log("upcoming exam");
-                    exam.isUpcoming = True;
-            })
-            res.render("myExams", { exams: foundStudent.exams, user: req.user });
+            var registeredExams = foundStudent.exams;
+            registeredExams = exam.updateExamStatus(registeredExams);
+            res.render("myExams", { exams: registeredExams, user: req.user });
         }
     })
 });

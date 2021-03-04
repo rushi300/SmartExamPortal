@@ -5,7 +5,7 @@ const passport     = require("passport");
 const Student         = require("../models/student");
 const Organisation = require("../models/organisation");
 const randomString = require('randomstring');
-const email = require('./email');
+const email = require('../helpers/email');
 const bcrypt = require('bcrypt');
 
 router.get("/login", (req, res) => {

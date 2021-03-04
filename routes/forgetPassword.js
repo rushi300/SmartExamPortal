@@ -4,7 +4,7 @@ const Student = require('../models/student');
 const Organisation = require('../models/organisation');
 const router = express.Router();
 const randomString = require('randomstring');
-const email = require('./email');
+const email = require('../helpers/email');
 const bcrypt = require('bcrypt');
 
 router.get("/forget-password", (req, res) => {
