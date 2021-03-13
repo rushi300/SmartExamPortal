@@ -18,13 +18,13 @@
         <span class="navbar-toggle" id="js-navbar-toggle">
             <i class="fas fa-bars"></i>
         </span>
-        <a href="/student-home/<%= id %>" class="logo">Exam Portal</a>
+        <a href="/student-home/<%= user._id %>" class="logo">Exam Portal</a>
         <ul class="main-nav" style="margin-top: 10px;font-size: 19px;" id="js-menu">
             <li>
-                <a href="/student-home/<%= id %>" class="nav-links">Home</a>
+                <a href="/student-home/<%= user._id %>" class="nav-links">Home</a>
             </li>
             <li>
-                <a href="/<%= id %>/myExams" class="nav-links">Registered Exams</a>
+                <a href="/<%= user._id %>/myExams" class="nav-links">Registered Exams</a>
             </li>
             <li>
                 <a href="/show-registered-organisations" class="nav-links">Registered Organizations</a>
@@ -50,11 +50,17 @@
                     <p>Exam starts at <%=exam.startTime%> and is of duration <%=exam.duration %></p>
                     <!-- <a href="<%= exam.link %>" class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:5px;padding:5x;margin-top:20px;">Registration Link</a> -->
                     <span>
-                    
-                    <form action="/subscribe/<%= exam._id %>" method="POST">
-                        <a href="<%= exam.link %>" class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:2px;padding:5x;margin-top:20px;">Registration Link</a>
-                        <button class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:5px;padding:5x;margin-top:20px;" type="submit">Subscribe </button>
-                    </form>   
+                    <% if(user.exams.indexOf(exam._id)==-1){ %>
+                        <form action="/subscribe/<%= exam._id %>" method="POST">
+                            <a href="<%= exam.link %>" class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:2px;padding:5x;margin-top:20px;">Registration Link</a>
+                            <button class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:5px;padding:5x;margin-top:20px;" type="submit">Subscribe </button>
+                        </form>   
+                    <% }else{ %>
+                    <form action="/unsubscribe/<%= exam._id %>" method="POST">
+                        <!-- <a href="<%= exam.link %>" class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:2px;padding:5x;margin-top:20px;">Registration Link</a> -->
+                        <button class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:5px;padding:5x;margin-top:20px;" type="submit">Unsubscribe </button>
+                    </form> 
+                    <% } %>  
                 </span>
 
                 </div>

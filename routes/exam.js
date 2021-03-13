@@ -3,7 +3,7 @@ const express = require("express");
 const router       = express.Router();
 const Organisation = require("../models/organisation");
 const moment = require('moment');
-
+const Student = require("../models/student");
 const Exam = require("../models/exam");
 
 router.get('/exam/new/:id', (req,res)=>{
@@ -51,6 +51,27 @@ router.post('/exam/new/:id', (req, res) => {
         isPublic = false;
     else
         isPublic = true;
+    
+    const currentTime = new Date();
+    let isCompleted = false;
+    let isLive = false;
+    let isUpcoming = false;
+    if (currentTime > startTime && currentTime < endTime) {
+        isCompleted = false;
+        isLive = true;
+        isUpcoming = false;
+    }
+    else if (currentTime > startTime && currentTime > endTime) {
+        isCompleted = true;
+        isLive = false;
+        isUpcoming = false;
+    }
+    else if (currentTime < startTime) {
+        isCompleted = false;
+        isLive = true;
+        isUpcoming = true;
+    }
+
     var newExam = new Exam({
         name: req.body.name,
         description: req.body.description,
@@ -60,7 +81,10 @@ router.post('/exam/new/:id', (req, res) => {
         endTime: endTime,
         duration: duration,
         isPublic: isPublic,
-        organizer: req.body.Name
+        organizer: req.body.Name,
+        isCompleted: isCompleted,
+        isLive: isLive,
+        isUpcoming: isUpcoming
     });
 
     Exam.create(newExam, (err,newlyCreated)=>{
@@ -88,7 +112,15 @@ router.get("/exam/:id/:student_id", function (req, res) {
         if(err){
             return res.redirect("back");
         } else {
-            res.render("viewExam", { exam: foundExam , id: req.params.student_id});
+            // console.log(req.user);
+            Student.findById(req.params.student_id,(err,foundStudent)=>{
+                if(err){
+                    console.error(err)
+                }else{
+                    // console.log("foundStudent: " + foundStudent);
+                    res.render("viewExam", { exam: foundExam , user: foundStudent});
+                }
+            })
         }
     })
 });

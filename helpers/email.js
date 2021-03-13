@@ -40,7 +40,6 @@ function sendEmail(email,subjectOfEmail, textToBeSentInEmail) {
     transporter.close();
 }
 
-
 module.exports = {
     sendEmail: sendEmail,
     studentEmailExists: studentEmailExists,

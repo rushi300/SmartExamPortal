@@ -5,6 +5,7 @@ const Organisation = require("../models/organisation");
 const Exam = require("../models/exam");
 const email = require('../helpers/email');
 const exam = require("../helpers/exam");
+const student = require("../models/student");
 
 router.get("/student-home/:id", (req, res) => {
     Student.findById(req.params.id).populate({
@@ -57,6 +58,21 @@ router.post("/subscribe/:clicked_exam_id", (req, res) => {
     });
 });
 
+router.post("/unsubscribe/:clicked_exam_id",(req,res)=>{
+    Exam.findById(req.params.clicked_exam_id, (err,foundExam)=>{
+        if(err){
+            res.redirect("back");
+            console.error(err);
+        }else{
+            req.user.exams.pull(foundExam);
+            foundExam.students_registered.pull(req.user);
+            req.user.save();
+            foundExam.save();
+            res.redirect("/student-home/"+ req.user._id);
+        }
+    })
+});
+
 router.post("/join-organisation", (req, res) => {
     Student.findById(req.user._id, (err, foundStudent) => {
         if (err)
@@ -68,6 +84,30 @@ router.post("/join-organisation", (req, res) => {
     
             foundStudent.organisations.push(foundOrganisation._id);
             foundOrganisation.students.push(foundStudent._id);
+            foundStudent.save();
+            foundOrganisation.save();
+            return res.redirect('/student-home/' + req.user._id);
+        });
+    });
+});
+
+router.post("/leave-organisation", (req, res) => {
+    Student.findById(req.user._id, (err, foundStudent) => {
+        if (err)
+            return res.redirect("back");
+        
+        Organisation.findOne({ joiningCode: req.body.joiningCode }, (err, foundOrganisation) => {
+            if (err)
+                return res.redirect("back");
+            
+            var organisationsArray = foundStudent.organisations;
+            var index = organisationsArray.indexOf(foundOrganisation._id);
+            organisationsArray.splice(index, 1);
+
+            var studentsArray = foundOrganisation.students;
+            index = studentsArray.indexOf(foundStudent._id);
+            studentsArray.splice(index, 1);
+
             foundStudent.save();
             foundOrganisation.save();
             return res.redirect('/student-home/' + req.user._id);
