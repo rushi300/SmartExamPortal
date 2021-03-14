@@ -60,6 +60,10 @@
                 <div style="text-align: center;" class="card-body"style="background-color: #e79f39;">
                   <h5 class="card-title"><%= organisation.Name %></h5>
                   <p class="card-text"><%= organisation.websiteLink %> </p>
+                  <form action="/leave-organisation" method="POST">
+                    <input type="hidden" value="<%= organisation.joiningCode %>" name="joiningCode">
+                    <button type="submit" class="btn">Leave Organisation</button>
+                  </form>
                   <!-- <a href="#" class="btn "style="background-color: #3e4041;color: #fff;">Submit</a> -->
                 </div>
               </div>
