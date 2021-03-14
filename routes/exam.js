@@ -118,7 +118,7 @@ router.get("/exam/:id/:student_id", function (req, res) {
                     console.error(err)
                 }else{
                     // console.log("foundStudent: " + foundStudent);
-                    res.render("viewExam", { exam: foundExam , user: foundStudent});
+                    res.render("tempViewExam", { exam: foundExam , user: foundStudent});
                 }
             })
         }

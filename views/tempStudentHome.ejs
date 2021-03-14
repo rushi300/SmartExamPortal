@@ -1,0 +1,117 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet"href="/stylesheets/tempStudentHome.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body >
+     <!-- Navbar begins -->
+    <nav style="background-color: #5d8168d9;"class="navbar">
+        <span class="navbar-toggle" id="js-navbar-toggle">
+            <i class="fas fa-bars"></i>
+        </span>
+        <a href="/student-home/<%=student._id%>" class="logo">Exam Portal</a>
+        <ul class="main-nav" style="margin-top: 10px;font-size: 19px;" id="js-menu">
+            <li>
+                <a href="/student-home/<%=student._id%>" class="nav-links">Home</a>
+            </li>
+            <li>
+                <a href="/<%=student._id%>/myExams" class="nav-links">Registered Exams</a>
+            </li>
+            <li>
+                <a href="/show-registered-organisations" class="nav-links">Join Organizations</a>
+            </li>
+        </ul>
+    </nav>
+    
+  <!-- Navbar ends -->
+
+<section class="project py-5">
+    <div style="float: right;margin-right:40px;margin-top: -20px;color: #fff;">
+        <input class="inp-cbx" id="onlypriv" type="checkbox" />
+            <label class="cbx" for="onlypriv">
+                <span><svg width="12px" height="10px">
+                    <use xlink:href="#check"></use></svg>
+                </span>
+                <span>Show only private exams</span> 
+            </label>
+            <svg class="inline-svg">
+                <symbol id="check" viewbox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+            </svg>
+    </div>
+    <div class="container" style="margin-top: 40px;">
+        <h2 style="color: #fff; float: left;margin-left: 50px;">Live Exams</h2>
+        <div class="l-container" style="margin: 0 auto;">
+            <!-- single card -->
+            <% exams.forEach((exam) => { %>
+                <% if(exam.isLive) { %>
+            <ol style="text-align: center;" class="articles Markup">
+                    <li class="articles__article" style="--animation-order:1"><a class="articles__link">
+                            <div class="articles__content articles__content--lhs">
+                                <h2 class="articles__title"><%= exam.name %></h2><br>
+                                <p>Organized By : <%= exam.organizer %></p>
+                                <p>Medium is : <%= exam.medium %></p>
+                                <time> <%= exam.date %> </time>
+                                <a href="/exam/<%= exam._id %>/<%= student._id %>" class="btn " style="background-color: #5d8168d9;color: #fff;border-radius: 20px;
+                                width: 135px;margin-left: 50px;margin-top: 20px;">Read More</a>
+                            </div>
+                            <div class="articles__content articles__content--rhs" aria-hidden="true">
+                                <h2 class="articles__title">Exam 1</h2><br>
+                                <p>Organized By : <%= exam.organizer %></p><p>Medium is : <%= exam.medium %></p>
+                                <time > <%= exam.date %></time>
+                                <a href="/exam/<%= exam._id %>/<%= student._id %>" class="btn " style="background-color: #5d8168d9;color: #fff;border-radius: 20px;
+                                width: 135px;margin-left: 50px;margin-top: 20px;">Read More</a>
+                            </div>
+                        </a>
+                    </li>
+            </ol> 
+            <% } %>
+            <% }) %>
+            <!-- single card ends -->                
+            </div>
+
+
+            <h2 style="color: #fff; float: left;margin-left: 50px;">Upcoming Exams</h2>
+            <div class="l-container" style="margin: 0 auto;">
+                
+                <!-- single card -->
+                <% exams.forEach((exam) => { %>
+                    <% if(exam.isUpcoming) { %>
+                        <ol style="text-align: center;" class="articles Markup">
+                            <li class="articles__article" style="--animation-order:1"><a class="articles__link">
+                                    <div class="articles__content articles__content--lhs">
+                                        <h2 class="articles__title"><%= exam.name %></h2><br>
+                                        <p>Organized By : <%= exam.organizer %></p>
+                                        <p>Medium is : <%= exam.medium %></p>
+                                        <time> <%= exam.date %> </time>
+                                        <a href="/exam/<%= exam._id %>/<%= student._id %>" class="btn " style="background-color: #5d8168d9;color: #fff;border-radius: 20px;
+                                        width: 135px;margin-left: 50px;margin-top: 20px;">Read More</a>
+                                    </div>
+                                    <div class="articles__content articles__content--rhs" aria-hidden="true">
+                                        <h2 class="articles__title">Exam 1</h2><br>
+                                        <p>Organized By : <%= exam.organizer %></p><p>Medium is : <%= exam.medium %></p>
+                                        <time > <%= exam.date %></time>
+                                        <a href="/exam/<%= exam._id %>/<%= student._id %>" class="btn " style="background-color: #5d8168d9;color: #fff;border-radius: 20px;
+                                        width: 135px;margin-left: 50px;margin-top: 20px;">Read More</a>
+                                    </div>
+                                </a>
+                            </li>
+                    </ol> 
+                    <% } %>
+                <% }) %>
+                <!-- single card end -->
+            </div>        
+        </div>
+    </section>
+
+      
+</body>
+</html>
