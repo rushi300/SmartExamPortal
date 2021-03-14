@@ -42,7 +42,7 @@
                                 <h5 class="card-title" style="font-size: 28px;"><%= exam.name %></h5>
                                 <br>
                                 <h6 class="card-subtitle mb-2 ">Medium is : <%= exam.medium %></h6>
-                                <h6 class="card-subtitle mb-2 "style="margin-top:15px;">Date : <%= exam.date %></h6>
+                                <h6 class="card-subtitle mb-2 "style="margin-top:15px;">Date : <%=exam.startTime.getDate()%>/<%=exam.startTime.getMonth()+1%>/<%=exam.startTime.getFullYear()%></h6>
                                 <h6 class="card-subtitle mb-2 "style="margin-top:15px;">Organized By : <%= exam.organizer %></h6>
                                 <h6 class="card-subtitle mb-2 "style="margin-top:15px;">Time Left : 4 days </h6>
                                 <form action="/unsubscribe/<%= exam._id %>" method="POST">
@@ -72,7 +72,7 @@
                             </a>
                             <br>
                             <h6 class="card-subtitle mb-2 ">Medium is : <%= exam.medium %></h6>
-                            <h6 class="card-subtitle mb-2 "style="margin-top:15px;">Date : <%= exam.date %></h6>
+                            <h6 class="card-subtitle mb-2 "style="margin-top:15px;">Date : <%=exam.startTime.getDate()%>/<%=exam.startTime.getMonth()+1%>/<%=exam.startTime.getFullYear()%></h6>
                             <h6 class="card-subtitle mb-2 "style="margin-top:15px;">Organized By : <%= exam.organizer %></h6>
                             <h6 class="card-subtitle mb-2 "style="margin-top:15px;">Time Left : 4 days </h6>
                             <form action="/unsubscribe/<%= exam._id %>" method="POST">

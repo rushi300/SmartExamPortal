@@ -20,7 +20,7 @@ router.get("/student-home/:id", (req, res) => {
             if (err)
                 return res.redirect("back");
             var allExams = exam.updateExamStatus(foundExams); 
-            return res.render("tempstudentHome", { exams: allExams, student: foundStudent });
+            return res.render("studentHome", { exams: allExams, student: foundStudent });
         });
     });
 });
@@ -33,7 +33,7 @@ router.get("/:student_id/myExams",(req,res)=>{
         }else{
             var registeredExams = foundStudent.exams;
             registeredExams = exam.updateExamStatus(registeredExams);
-            res.render("tempRegisteredExams", { exams: registeredExams, user: req.user });
+            res.render("RegisteredExams", { exams: registeredExams, user: req.user });
         }
     })
 });

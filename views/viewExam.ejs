@@ -1,20 +1,18 @@
-
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= exam.name %></title>
-    <link rel="stylesheet" href="/stylesheets/viewExam.css">
-    <script src="https://kit.fontawesome.com/332a215f17.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <link rel="stylesheet"href="/stylesheets/tempViewExam.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-
-<body style="background-color: #424242;" >
-   
-     <nav class="navbar">
+<body style="background-color: #1E2E3D;" >
+     <!-- Navbar begins -->
+    <nav class="navbar">
         <span class="navbar-toggle" id="js-navbar-toggle">
             <i class="fas fa-bars"></i>
         </span>
@@ -29,59 +27,46 @@
             <li>
                 <a href="/show-registered-organisations" class="nav-links">Registered Organizations</a>
             </li>
-
+            
         </ul>
     </nav>
-<div style="align-items: center;" class="container mt-5">
-    <div class="jumbotron align-items-center" style="background-color: #c1d1e1;">
-        <h2 style="color: #424242;" class="display-4"><%= exam.name %></h2>
-        <h6 style="color: #424242;margin-top: 9px;" class="display-6">Organised By <%= exam.organizer%></h6>
-
-        <hr  style="color: #424242;" class="my-4">
-            <div class="row">
-                <div class="col-md-8">
-                    <b>
-                        <!-- <p class="lead">More Information about the Organization</p> -->
-                    </b>
-                    <p><%= exam.description %></p>
-                    <br>
-                    <p>Date :<%=exam.date%></p>
+  <!-- Navbar ends -->
+    <section class="project py-5">
+        <div class="container">
+            <div style="align-items: center;" class="container mt-5">
+                <div class="jumbotron align-items-center" style="background-color: #374455; text-align: center;">
                    
-                    <p>Exam starts at <%=exam.startTime%> and is of duration <%=exam.duration %></p>
-                    <!-- <a href="<%= exam.link %>" class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:5px;padding:5x;margin-top:20px;">Registration Link</a> -->
+                    <h2 style="color: #fff;" class="display-4"><%= exam.name %></h2>
                     <span>
-                    <% if(user.exams.indexOf(exam._id)==-1){ %>
-                        <form action="/subscribe/<%= exam._id %>" method="POST">
-                            <a href="<%= exam.link %>" class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:2px;padding:5x;margin-top:20px;">Registration Link</a>
-                            <button class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:5px;padding:5x;margin-top:20px;" type="submit">Subscribe </button>
-                        </form>   
-                    <% }else{ %>
-                    <form action="/unsubscribe/<%= exam._id %>" method="POST">
-                        <!-- <a href="<%= exam.link %>" class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:2px;padding:5x;margin-top:20px;">Registration Link</a> -->
-                        <button class="btn" style="background-color: #e79f39;color: #3e4041;margin-left:5px;padding:5x;margin-top:20px;" type="submit">Unsubscribe </button>
-                    </form> 
-                    <% } %>  
-                </span>
-
+                    <h6 style="color: rgba(255, 255, 255,0.8);margin-top: 9px;" class="display-6">conducted by <%= exam.organizer%></h6>
+                   
+                    </span>
+                    <hr  style="color: #fff;" class="my-4">
+                        <div class="row" style="margin: 0 auto">
+                            <div style="color:#fff;margin: 0 auto;"  >
+                                <p style="margin: 0 80px;"><%= exam.description %></p>
+                                <br>
+                                <p>Date: <%=exam.startTime.getDate()%>/<%=exam.startTime.getMonth()+1%>/<%=exam.startTime.getFullYear()%></p>
+                                <p>Medium:  <%=exam.medium%></p>
+                                <p>Exam starts at <%=exam.startTime%> and is of duration <%=exam.duration %></p>
+                                <% if(user.exams.indexOf(exam._id)==-1){ %>
+                                <form action="/subscribe/<%=exam._id%>" method="post">
+                                    <button type="submit" class="btn" style="background-color: #5d8168d9;color: #fff;margin-left:5px;padding:5x;margin-top:20px;margin-left:-3px;margin-right: 20px;">Subscribe</button>
+                                    <a href="<%= exam.link %>" class="btn" style="background-color: #5d8168d9;color: #fff;margin-left:5px;padding:5x;margin-top:20px;margin-left:-3px">Registration Link</a>
+                                </form>
+                                <% }else{ %>
+                                    <form action="/unsubscribe/<%= exam._id %>" method="POST">
+                                        <button type="submit" class="btn" style="background-color: #5d8168d9;color: #fff;margin-left:5px;padding:5x;margin-top:20px;margin-left:-3px;margin-right: 20px;">Unsubscribe</button>
+                                    </form>
+                                <% } %>
+                            </div>
+                            
+                        </div>
+                      
+                        
                 </div>
-            
-    </div>
-</div>
-</div>
-<script>
-    		$(document).ready(function(){
-		    $('.count').prop('disabled', true);
-   			$(document).on('click','.plus',function(){
-				$('.count').val(parseInt($('.count').val()) + 1 );
-    		});
-        	$(document).on('click','.minus',function(){
-    			$('.count').val(parseInt($('.count').val()) - 1 );
-    				if ($('.count').val() == 0) {
-						$('.count').val(1);
-					}
-    	    	});
- 		});
-</script>
+            </div>
+            </div>
+            </section>
 </body>
-
 </html>
